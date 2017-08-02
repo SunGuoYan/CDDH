@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "43afb7c6-4380-b345-9f44-bfdbfdf9fb75++3577",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "43afb7c6-4380-b345-9f44-bfdbfdf9fb75++3577" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "43afb7c6-4380-b345-9f44-bfdbfdf9fb75++3577" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1AC7AA02-6C7A-4271-9BBD-DF528F0366A2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "43afb7c6-4380-b345-9f44-bfdbfdf9fb75++3577" : "uway-charger-ios-master\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ChargingStationHelper",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ChargingStationHelper.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/192.168.8.43\/svn\/wuhan_dev",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43afb7c6-4380-b345-9f44-bfdbfdf9fb75++3577"
+    }
+  ]
+}

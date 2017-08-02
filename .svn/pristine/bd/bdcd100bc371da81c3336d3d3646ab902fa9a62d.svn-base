@@ -1,0 +1,388 @@
+//
+//  CSHChargingViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 3/2/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHChargingViewController.h"
+#import "CSHStartStationVC.h"
+#import "CSHStartingStationVC.h"
+#import <AVFoundation/AVFoundation.h>
+
+@interface CSHChargingViewController () <AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate>
+
+@property (nonatomic, strong) UIView *scanView;
+@property (nonatomic, strong) UIImageView *scanRectView;
+@property (nonatomic, strong) UIImageView *scanLineImageView;
+@property (nonatomic, assign) CGSize scanSize;
+
+@property (nonatomic, strong) UIView *deviceNumberView;
+@property (nonatomic, strong) UITextField *deviceNumberTextField;
+
+@property (strong, nonatomic) AVCaptureDevice            *device;
+@property (strong, nonatomic) AVCaptureDeviceInput       *input;
+@property (strong, nonatomic) AVCaptureMetadataOutput    *output;
+@property (strong, nonatomic) AVCaptureSession           *session;
+@property (strong, nonatomic) AVCaptureVideoPreviewLayer *preview;
+
+@end
+
+@implementation CSHChargingViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
+    
+    self.output = [[AVCaptureMetadataOutput alloc]init];
+    [self.output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    
+    self.session = [[AVCaptureSession alloc]init];
+    [self.session setSessionPreset:([UIScreen mainScreen].bounds.size.height<500)?AVCaptureSessionPreset640x480:AVCaptureSessionPresetHigh];
+    
+    //判断是否有相机
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]==NO) {
+        NSLog(@"no camera");
+        [MBProgressHUD showError:@"您的设备缺少相机"];
+        return ;
+    }
+    
+    // 这里运行两处崩溃  但是真机调试就没问题，疑是模拟器缺少相机无扫描功能
+    [self.session addInput:self.input];
+    [self.session addOutput:self.output];
+    self.output.metadataObjectTypes=@[AVMetadataObjectTypeQRCode];
+    
+    //计算扫描器的大小
+    CGSize windowSize = CGSizeMake(CGRectGetMaxX([UIScreen mainScreen].bounds), CGRectGetMaxY([UIScreen mainScreen].bounds) - 64);
+    CGSize scanSize = CGSizeMake(windowSize.width*3/4, windowSize.width*3/4);
+    self.scanSize = scanSize;
+    
+    
+    //计算扫面器的坐标位置
+    CGRect scanRect = CGRectMake((windowSize.width-scanSize.width)/2, 60, scanSize.width, scanSize.height);
+    //计算rectOfInterest 注意x,y交换位置
+    scanRect = CGRectMake(scanRect.origin.y/windowSize.height, scanRect.origin.x/windowSize.width, scanRect.size.height/windowSize.height,scanRect.size.width/windowSize.width);
+    self.output.rectOfInterest = scanRect;
+    
+    
+    //1，第一个界面的 clear 的大背景视图
+    self.scanView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, windowSize.width, windowSize.height)];
+    [self.view addSubview:self.scanView];//1
+    self.scanView.backgroundColor = [UIColor clearColor];
+    
+    // 2，扫描的那个线条  scan-frame
+    self.scanRectView = [UIImageView new];
+    self.scanRectView.image = [UIImage imageNamed:@"scan-frame"];
+    [self.scanView addSubview:self.scanRectView];
+    
+    self.scanRectView.frame = CGRectMake((windowSize.width-scanSize.width)/2, 60, scanSize.width, scanSize.height);
+    
+    //3， 扫描的那个线条  scan-line
+    self.scanLineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, scanSize.width - 20, 2)];
+    self.scanLineImageView.image = [UIImage imageNamed:@"scan-line"];
+    [self.scanRectView addSubview:self.scanLineImageView];
+    
+    //4，白色提示文字 label
+    UILabel *scanLabel = [UILabel new];
+    scanLabel.font = [UIFont systemFontOfSize:13.0f];
+    scanLabel.textColor = [UIColor whiteColor];
+    scanLabel.textAlignment = NSTextAlignmentCenter;
+    scanLabel.numberOfLines = 0;
+    CGFloat margin = 20.0f;
+    CGFloat scanLabelWidth = windowSize.width - margin * 2;
+    scanLabel.preferredMaxLayoutWidth = scanLabelWidth;
+    scanLabel.frame = CGRectMake(margin, CGRectGetMaxY(self.scanRectView.frame) + 20, scanLabelWidth, 40.0f);
+    scanLabel.text = @"将充电桩上的二维码放入框内，即可享受充电服务";
+    [self.scanView addSubview:scanLabel];
+    
+    //5，切换至输入设备号充电 label
+    UILabel *switchToDeviceNumberLabel = [UILabel new];
+    switchToDeviceNumberLabel.font = [UIFont systemFontOfSize:13.0f];
+    switchToDeviceNumberLabel.textColor = [UIColor whiteColor];
+    switchToDeviceNumberLabel.textAlignment = NSTextAlignmentCenter;
+    switchToDeviceNumberLabel.numberOfLines = 1;
+    switchToDeviceNumberLabel.text = @"切换至输入设备号充电";
+    [switchToDeviceNumberLabel sizeToFit];
+    CGFloat horizontalSpacing = 15.0f;
+    CGFloat switchToDeviceNumberLabelHeight = CGRectGetHeight(switchToDeviceNumberLabel.bounds);
+    CGFloat keyboardIconImageViewWidth = switchToDeviceNumberLabelHeight * 67.0f / 44.0f;
+    switchToDeviceNumberLabel.frame = CGRectMake(keyboardIconImageViewWidth + horizontalSpacing * 2, horizontalSpacing, CGRectGetWidth(switchToDeviceNumberLabel.bounds), CGRectGetHeight(switchToDeviceNumberLabel.bounds));
+    
+    //6，切换至输入设备号充电 icon
+    UIImageView *keyboardIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(horizontalSpacing, horizontalSpacing, keyboardIconImageViewWidth, switchToDeviceNumberLabelHeight)];
+    keyboardIconImageView.image = [UIImage imageNamed:@"keyboard-icon"];
+    
+    //7，切换至输入设备号充电 灰色背景
+    UIView *switchToDeviceNumberContainerView = [[UIView alloc] init];
+    switchToDeviceNumberContainerView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+    switchToDeviceNumberContainerView.bounds = CGRectMake(0, 0, CGRectGetWidth(switchToDeviceNumberLabel.bounds) + keyboardIconImageViewWidth + horizontalSpacing * 3, switchToDeviceNumberLabelHeight + horizontalSpacing * 2);
+    switchToDeviceNumberContainerView.center = CGPointMake(windowSize.width / 2.0f, windowSize.height - horizontalSpacing * 2 - CGRectGetMaxY(keyboardIconImageView.bounds) / 2.0f);
+    switchToDeviceNumberContainerView.layer.cornerRadius = CGRectGetHeight(switchToDeviceNumberContainerView.bounds) / 2.0f;
+    switchToDeviceNumberContainerView.layer.masksToBounds = YES;
+    
+    //切换至输入设备号充电入 灰色背景 添加手势
+    [switchToDeviceNumberContainerView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwitchToDeviceNumberTapGesture:)]];
+    //母视图上加小控件 icon
+    [switchToDeviceNumberContainerView addSubview:keyboardIconImageView];
+    
+    //母视图上加小控件 label
+    [switchToDeviceNumberContainerView addSubview:switchToDeviceNumberLabel];
+   
+//    [self.scanView addSubview:switchToDeviceNumberContainerView];
+    
+    //自己做的  切换至输入设备号充电入 button
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame=CGRectMake(CGRectGetMinX(switchToDeviceNumberContainerView.frame), CGRectGetMinY(switchToDeviceNumberContainerView.frame)-50+30, switchToDeviceNumberContainerView.frame.size.width+10, switchToDeviceNumberContainerView.frame.size.height);
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"切换至输入设备号充电" forState:UIControlStateNormal];
+    btn.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+    btn.layer.cornerRadius=15;
+    btn.layer.masksToBounds=YES;
+    [self.scanView addSubview:btn];
+    
+//    CGFloat screenW=[UIScreen mainScreen].bounds.size.width;
+    //手电筒
+    UIButton *lightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    lightBtn.frame=CGRectMake(screenW/2-15, CGRectGetMinY(switchToDeviceNumberContainerView.frame)-50-40+30, 30, 30);
+    [lightBtn addTarget:self action:@selector(lightUp:) forControlEvents:UIControlEventTouchUpInside];
+    [lightBtn setBackgroundImage:[UIImage imageNamed:@"light-up-icon"] forState:UIControlStateNormal];
+//    [lightBtn setTitle:@"切换至输入设备号充电入" forState:UIControlStateNormal];
+//    lightBtn.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+//    lightBtn.layer.cornerRadius=15;
+//    lightBtn.layer.masksToBounds=YES;
+    [self.scanView addSubview:lightBtn];
+    
+    
+    /**     第二个界面      **/
+    
+    
+    //1，第二个界面的 clear 的大背景视图
+    self.deviceNumberView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, windowSize.width, windowSize.height)];
+    self.deviceNumberView.hidden = YES;
+    [self.view addSubview:self.deviceNumberView];
+    self.deviceNumberView.backgroundColor = [UIColor clearColor];
+    
+    //2，输入框的白色背景
+    UIView *deviceNumberTextFieldContainerView = [[UIView alloc] initWithFrame:CGRectMake(horizontalSpacing, 100, windowSize.width - horizontalSpacing * 2, 50)];
+    deviceNumberTextFieldContainerView.backgroundColor = [UIColor whiteColor];
+    deviceNumberTextFieldContainerView.layer.cornerRadius = 4.0f;
+    deviceNumberTextFieldContainerView.layer.masksToBounds = YES;
+    [self.deviceNumberView addSubview:deviceNumberTextFieldContainerView];
+    
+    //3，输入框
+    self.deviceNumberTextField = [[UITextField alloc] initWithFrame:CGRectMake(horizontalSpacing, 0, windowSize.width - horizontalSpacing * 4, 50)];
+    self.deviceNumberTextField.backgroundColor = [UIColor whiteColor];
+    self.deviceNumberTextField.keyboardType=UIKeyboardTypeNumberPad;
+    self.deviceNumberTextField.font = [UIFont systemFontOfSize:15.0f];
+    self.deviceNumberTextField.placeholder = @"请输入设备号";
+    self.deviceNumberTextField.layer.cornerRadius = 4.0f;
+    self.deviceNumberTextField.layer.masksToBounds = YES;
+    [deviceNumberTextFieldContainerView addSubview:self.deviceNumberTextField];
+    
+    //4，切换至扫码 label
+    UILabel *switchToScanLabel = [UILabel new];
+    switchToScanLabel.textColor = [UIColor whiteColor];
+    switchToScanLabel.font = [UIFont systemFontOfSize:13.0f];
+    switchToScanLabel.text = @"切换至扫码";
+    [switchToScanLabel sizeToFit];
+    CGFloat scanIconHeight = 24.0f;
+    switchToScanLabel.frame = CGRectMake(horizontalSpacing * 2 + scanIconHeight, horizontalSpacing, CGRectGetWidth(switchToScanLabel.bounds), CGRectGetHeight(switchToScanLabel.bounds));
+    
+    
+    //5，切换至扫码 icon
+    UIImageView *scanIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(horizontalSpacing, (CGRectGetHeight(switchToScanLabel.bounds) + horizontalSpacing * 2 - scanIconHeight) / 2.0f , scanIconHeight, scanIconHeight)];
+    scanIconImageView.image = [UIImage imageNamed:@"scan-icon"];
+    
+    
+    //6，切换至扫码 灰色背景图
+    UIView *switchToScanContainerView = [[UIView alloc] initWithFrame:CGRectMake(horizontalSpacing, CGRectGetMaxY(deviceNumberTextFieldContainerView.frame) + 40, horizontalSpacing * 3 + scanIconHeight + CGRectGetWidth(switchToScanLabel.bounds), CGRectGetHeight(switchToScanLabel.bounds) + horizontalSpacing * 2)];
+    switchToScanContainerView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+//    switchToScanContainerView.backgroundColor=[UIColor greenColor];
+    switchToScanContainerView.layer.cornerRadius = CGRectGetHeight(switchToScanContainerView.bounds) / 2.0f;
+    switchToScanContainerView.layer.masksToBounds = YES;
+    //添加手势  切换至扫码
+    [switchToScanContainerView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwitchToScanTapGesture:)]];
+    [switchToScanContainerView addSubview:scanIconImageView];
+    [switchToScanContainerView addSubview:switchToScanLabel];
+    [self.deviceNumberView addSubview:switchToScanContainerView];
+    
+    //7，确定按钮
+    UIButton *deviceNumberConfirmButton = [UIButton new];
+    deviceNumberConfirmButton.frame = CGRectMake(windowSize.width - CGRectGetWidth(switchToScanContainerView.bounds) - horizontalSpacing, CGRectGetMinY(switchToScanContainerView.frame), CGRectGetWidth(switchToScanContainerView.bounds), CGRectGetHeight(switchToScanContainerView.bounds));
+    [deviceNumberConfirmButton setTitle:@"确定" forState:UIControlStateNormal];
+    [deviceNumberConfirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    deviceNumberConfirmButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    deviceNumberConfirmButton.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+    deviceNumberConfirmButton.layer.cornerRadius = CGRectGetHeight(deviceNumberConfirmButton.bounds) / 2.0f;
+    deviceNumberConfirmButton.layer.masksToBounds = YES;
+    //  确定按钮的点击事件
+    [deviceNumberConfirmButton addTarget:self action:@selector(handleDeviceNumberConfirmButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.deviceNumberView addSubview:deviceNumberConfirmButton];
+    
+    self.preview = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+    self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.preview.frame = [UIScreen mainScreen].bounds;
+    [self.view.layer insertSublayer:self.preview atIndex:0];
+    
+    //开始捕获
+    [self.session startRunning];
+}
+-(void)lightUp:(UIButton *)btn{
+    if (btn.selected) {
+        [self turnTorchOn:YES];
+    }else{
+        [self turnTorchOn:NO];
+    }
+    btn.selected=!btn.selected;
+    
+}
+- (void) turnTorchOn: (bool) on
+{
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if ([device hasTorch] && [device hasFlash]){
+            
+            [device lockForConfiguration:nil];
+            if (on) {
+                [device setTorchMode:AVCaptureTorchModeOn];
+                [device setFlashMode:AVCaptureFlashModeOn];
+                on = YES;
+            } else {
+                [device setTorchMode:AVCaptureTorchModeOff];
+                [device setFlashMode:AVCaptureFlashModeOff];
+                on = NO;
+            }
+            [device unlockForConfiguration];
+        }
+    }
+}
+
+//界面一点击切换至输入设备号充电 切换界面
+-(void)btnClick{
+    
+    NSLog(@"btnClick");
+    
+    self.deviceNumberView.hidden = NO;
+    self.scanView.hidden = YES;
+    [self turnTorchOn:NO];
+    [self.deviceNumberTextField resignFirstResponder];
+//    [self.deviceNumberTextField becomeFirstResponder];
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //判断是否有相机
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]==NO) {
+        NSLog(@"no camera");
+        [MBProgressHUD showError:@"您的设备缺少相机"];
+        return ;
+    }
+    [self.tabBarController.tabBar setHidden:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
+    
+    if (!self.scanView.hidden) {
+        [self startScanLineImageViewAnimation];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self turnTorchOn:NO];
+    self.scanLineImageView.frame = CGRectMake(10, 10, self.scanSize.width - 20, 2);
+    [self.tabBarController.tabBar setHidden:NO];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+//左上角的的返回按钮
+//协议方法 在CSHTabBarController实现，设置index=0
+- (IBAction)handleLeftBarButton:(UIBarButtonItem *)sender {
+    [self.delegate chargingViewControllerDidStop];
+}
+#pragma mark --- push to CSHStartStationVC
+//界面二的点击确定按钮  push到开启充电的界面
+- (void)handleDeviceNumberConfirmButton:(UIButton *)button {
+    NSLog(@"确定");
+    CSHStartStationVC *vc=[[CSHStartStationVC alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    CSHStartingStationVC *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHStartingStationVC class])];
+//    [self.tabBarController.tabBar setHidden:YES];
+    //我的隐藏tabBar的思路
+    //    self.tabBarController.tabBar.hidden=YES;
+//    [self.navigationController pushViewController:viewController animated:YES];
+    
+}
+
+/*  这段代码好像没什么用 */
+//切换到界面二
+- (void)handleSwitchToDeviceNumberTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer {
+    NSLog(@"返回界面二");
+    self.deviceNumberView.hidden = NO;
+    self.scanView.hidden = YES;
+//    self.deviceNumberTextField.keyboardType=UIKeyboardTypeNumberPad;
+    [self.deviceNumberTextField resignFirstResponder];
+//    [self.deviceNumberTextField becomeFirstResponder];
+}
+
+
+//返回界面一
+- (void)handleSwitchToScanTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer {
+    NSLog(@"返回界面一");
+    self.deviceNumberView.hidden = YES;
+    self.scanView.hidden = NO;
+    [self.deviceNumberTextField resignFirstResponder];
+}
+
+- (void)startScanLineImageViewAnimation {
+    
+    [UIView animateWithDuration:2.4 delay:0.0 options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat animations:^{
+        
+        self.scanLineImageView.frame = CGRectMake(10, self.scanSize.height - 10, self.scanSize.width - 20, 2);
+        
+    } completion:nil];
+
+}
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    
+    if (self.scanView.hidden) {
+        return;
+    }
+    
+    if ( (metadataObjects.count==0) )
+    {
+        return;
+    }
+    
+    if (metadataObjects.count>0) {
+        
+        [self.session stopRunning];
+        
+        AVMetadataMachineReadableCodeObject *metadataObject = metadataObjects.firstObject;
+        //输出扫描字符串
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:metadataObject.stringValue message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self.session startRunning];
+}
+
+
+@end

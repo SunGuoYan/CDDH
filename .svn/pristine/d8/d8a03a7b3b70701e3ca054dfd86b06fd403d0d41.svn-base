@@ -1,0 +1,218 @@
+//
+//  CSHMenuTableViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 3/4/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "UIImageView+WebCache.h"
+// 这里的UITableVC 直接与sb关联
+#import "CSHMenuTableViewController.h"
+#import "CSHLoginViewController.h"
+#import "CSHLoginAndSignupViewController.h"
+#import "NSUserDefaults+UserConfig.h"
+#import "CSHPreferenceTableViewController.h"
+#import "CSHBalanceViewController.h"
+#import "CSHDriverCertificatingViewController.h"
+#import "CSHSettingsViewController.h"
+#import "CSHMyCollectionViewController.h"
+#import "CSHMessageCenterViewController.h"
+#import "CSHChargingHistoryViewController.h"
+#import "CSHBookingHistoryViewController.h"
+#import "CSHRecommendationViewController.h"
+
+
+#import "CSHPersonnelTableVC.h"
+
+@interface CSHMenuTableViewController ()
+
+//用户头像
+@property (weak, nonatomic) IBOutlet UIImageView *userIcon;
+//用户名
+@property (weak, nonatomic) IBOutlet UILabel *userNameLab;
+//用户手机号码
+@property (weak, nonatomic) IBOutlet UILabel *userPhoneNumberLab;
+
+//完善资料 icon
+@property (weak, nonatomic) IBOutlet UIImageView *improveInfoIcon;
+
+//登录/注册 label
+@property (weak, nonatomic) IBOutlet UILabel *loginAndRegister;
+
+@end
+
+@implementation CSHMenuTableViewController
+-(void)viewWillAppear:(BOOL)animated{
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"accountId"]!=nil) {
+        //如果登陆
+        self.loginAndRegister.hidden=YES;
+        
+        self.userNameLab.hidden=NO;
+        self.userPhoneNumberLab.hidden=NO;
+        self.improveInfoIcon.hidden=NO;
+    }else{
+        //未登陆状态
+        self.loginAndRegister.hidden=NO;
+        
+        self.userNameLab.hidden=YES;
+        self.userPhoneNumberLab.hidden=YES;
+        self.improveInfoIcon.hidden=YES;
+    }
+    
+    if ([defaults objectForKey:@"userPhone"]!=nil) {
+        self.userPhoneNumberLab.text=[defaults objectForKey:@"userPhone"];
+        self.userNameLab.text=[defaults objectForKey:@"userName"];
+        NSString *userImage=[defaults objectForKey:@"userImage"];
+        
+        UIImage *image=[UIImage imageNamed:@""];
+        [self.userIcon sd_setImageWithURL:[NSURL URLWithString:userImage] placeholderImage:image];
+        
+    }
+    
+    
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    [self.loginAndRegister setTextColor:[UIColor colorWithRed:0 green:0.71 blue:0.69 alpha:1]];
+    
+//    NSLog(@"name:%@",self.userNameLab.text);
+//    NSLog(@"phone:%@",self.userPhoneNumberLab.text);
+//    self.basicInfomation.hidden=YES;
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
+
+#pragma mark - response to behavior
+
+//点击右上角 设置图标 跳转到详情页面
+- (IBAction)handleSettingsBarButton:(UIBarButtonItem *)sender {
+    CSHSettingsViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHSettingsViewController class])];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+//点击消息中心（手势） push到下一页
+- (IBAction)handleTapOnMessageGesture:(UITapGestureRecognizer *)sender {
+    CSHMessageCenterViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHMessageCenterViewController class])];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+//点击我的收藏（手势） push到下一页
+- (IBAction)handleTapOnCollectionGesture:(UITapGestureRecognizer *)sender {
+    CSHMyCollectionViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHMyCollectionViewController class])];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+//点击充电记录（手势） push到下一页
+- (IBAction)handleTapOnChargingHistoryGesture:(UITapGestureRecognizer *)sender {
+    CSHChargingHistoryViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHChargingHistoryViewController class])];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+//点击预约记录（手势） push到下一页
+- (IBAction)handleTapOnBookingHistoryGesture:(UITapGestureRecognizer *)sender {
+    CSHBookingHistoryViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHBookingHistoryViewController class])];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+#pragma mark - Table view data source & delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 1.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+#pragma mark - cell 的点击事件
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // ？
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    //点击cell  push 到登录界面
+    if (indexPath.section == 0 || (indexPath.section == 1 && indexPath.row == 1) || indexPath.section == 2) {
+        if ([NSUserDefaults csh_isLogin]==NO) {
+            //push 到登录界面
+//            [self showLoginViewController];
+//             [self goToPersonnelInfomation];
+
+//            return;
+        }
+    }
+    if (indexPath.section==0) {
+        if ([NSUserDefaults csh_isLogin]==YES) {
+            [self goToPersonnelInfomation];
+        }
+    }
+    
+    // test for login feature
+//    if (indexPath.section == 0) {
+//        [self showLoginViewController];
+//    }
+    
+    //push 我的钱包界面
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Menu" bundle:nil];
+        CSHBalanceViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHBalanceViewController class])];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        CSHDriverCertificatingViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHDriverCertificatingViewController class])];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
+    if (indexPath.section == 2 && indexPath.row == 2) {
+        CSHRecommendationViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHRecommendationViewController class])];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
+    //push 偏好设置
+    if (indexPath.section == 2 && indexPath.row == 3) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Menu" bundle:nil];
+        CSHPreferenceTableViewController *perferenceViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHPreferenceTableViewController class])];
+        [self.navigationController pushViewController:perferenceViewController animated:YES];
+    }
+}
+
+#pragma mark - navigation
+
+
+-(void)goToPersonnelInfomation{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"personneInfo" bundle:nil];
+    
+//    CSHPersonnelInfoVC *vc=[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHPersonnelInfoVC class])];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+//    CSHPersonnelInfoViewController *vc=[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHPersonnelInfoViewController class])];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    CSHPersonnelTableVC *vc=[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHPersonnelTableVC class])];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+- (void)showLoginViewController {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    
+    CSHLoginViewController *vc=[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHLoginViewController class])];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    CSHLoginAndSignupViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHLoginAndSignupViewController class])];
+//    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+@end

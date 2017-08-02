@@ -1,0 +1,58 @@
+//
+//  CSHPrefix.pch
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/20/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#ifndef CSHPrefix_pch
+#define CSHPrefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+
+#import "CSHUtils.h"
+#import "UIColor+CSH.h"
+#import "UIView+CornerRadius.h"
+#import "UIStoryboard+CSH.h"
+#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD+MJ.h"
+#import "UIView+Frame.h"
+
+#define TOKEN @"access_token"
+
+//#define baseUrl @"http://139.224.228.120:8200"//139
+
+#define baseUrl @"http://120.52.12.203:8200"  //公网
+
+//#define baseUrl @"http://192.168.28.233:8100"//戴思
+
+//#define baseUrl @"http://180.97.90.76:8200"  //亨通
+//#define baseUrl @"http://192.168.28.234:8100"  //肖烁
+//#define baseUrl @"http://192.168.28.242:8100"  //王彬IP
+
+#define screenW [UIScreen mainScreen].bounds.size.width
+#define screenH [UIScreen mainScreen].bounds.size.height
+
+#import "NSUserDefaults+UserConfig.h"
+
+#define initialGray [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1]
+
+#define bginitialGray [UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1]
+
+#define themeCorlor [UIColor colorWithRed:0.13 green:0.59 blue:0.95 alpha:1]
+//#define themeCorlor [UIColor colorWithRed:0 green:0.71 blue:0.69 alpha:1]
+
+#define themeRed [UIColor colorWithRed:0.87 green:0.02 blue:0.08 alpha:1]
+#define themeBlue [UIColor colorWithRed:0.13 green:0.59 blue:0.95 alpha:1]
+
+#import "CSHPublicModel.h"
+
+#endif
+
+#endif /* CSHPrefix_pch */

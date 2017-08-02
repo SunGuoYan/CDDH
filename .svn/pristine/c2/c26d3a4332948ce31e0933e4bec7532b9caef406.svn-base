@@ -1,0 +1,249 @@
+//
+//  CSHChargingStationViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 3/14/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHChargingStationViewController.h"
+#import "CSHChargingStationDetailTableViewCell.h"
+#import "CSHDevice.h"
+#import "UIColor+CSH.h"
+#import "CSHChargingStationCommentTableViewCell.h"
+#import "CSHChargingStationPhotoCollectionViewCell.h"
+
+@interface CSHChargingStationViewController () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+
+// device info views
+//电站名称
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+//已联网 小button
+@property (weak, nonatomic) IBOutlet UIImageView *summaryOnlineImageViw;
+//小横条
+@property (weak, nonatomic) IBOutlet UIView *deviceFeatureView;
+//计费规则 小label
+@property (weak, nonatomic) IBOutlet UIButton *chargingRuleButton;
+//APP 充电 小icon
+@property (weak, nonatomic) IBOutlet UIImageView *onlineChargingImageView;
+//APP 充电 小label
+@property (weak, nonatomic) IBOutlet UILabel *onlineChargingLabel;
+
+//对外开放 小label
+@property (weak, nonatomic) IBOutlet UILabel *privateInfoLabel;
+//地址
+@property (weak, nonatomic) IBOutlet UILabel *deviceAddressLabel;
+//距离
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+//另一个小横条 ？？ 白色充电桩的警告
+@property (weak, nonatomic) IBOutlet UIView *uncertificatedWarningView;
+//设备信息概要图
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+
+// tab button and sliders
+@property (weak, nonatomic) IBOutlet UIView *sliderView;
+
+//三个按钮
+@property (weak, nonatomic) IBOutlet UIButton *detailButton;
+@property (weak, nonatomic) IBOutlet UIButton *photoButton;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
+//三个屏宽的背景图
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
+//三个屏宽的背景图 的宽高设置
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewHeightConstraint;
+
+//scrollView
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+//小滑条的x值得设置
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sliderViewCenterXConstraint;
+
+//第一个详情按钮下面的VC 没有？sb上的label也没拖到属性上来？
+
+
+
+// comments and photos list view
+//评论的table
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//图片的collection
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@end
+
+@implementation CSHChargingStationViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //1,详情  VC呢？？
+    
+    //3,评论的table
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 40);
+    
+    //2,图片collection
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
+    self.scrollView.delegate = self;
+//    self.scrollView.bounces=NO;
+    
+    //给界面充电站的基本信息赋值 传入一个device
+    [self configureWithDevice:self.device];
+    
+//    self.view.backgroundColor=[UIColor yellowColor];
+//    
+//    UIView *a=[[UIView alloc]initWithFrame:CGRectMake(50, 50, 100, 100)];
+//    a.backgroundColor=[UIColor greenColor];
+//    [self.view addSubview:self.scrollView];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+// 和 viewWillAppear 一样 控件加约束
+
+- (void)viewWillLayoutSubviews {
+    //三个屏宽的背景图 的宽高设置
+    self.containerViewWidthConstraint.constant = kCSHScreenWidth * 3;
+    self.containerViewHeightConstraint.constant = kCSHScreenHeight - 64.0f - CGRectGetHeight(self.headerView.bounds) - CGRectGetHeight(self.sliderView.bounds);
+
+    [super viewWillLayoutSubviews];
+}
+
+#pragma mark - response to behavior
+//点击想详情按钮  设置scrollView的偏移量 切换界面
+- (IBAction)handleDetailButton:(UIButton *)sender {
+    [self.scrollView setContentOffset:CGPointMake(0, 0)];
+    [self updateTabView];
+}
+//点击照片按钮
+- (IBAction)handlePhotoButton:(UIButton *)sender {
+    [self.scrollView setContentOffset:CGPointMake(kCSHScreenWidth, 0)];
+    [self updateTabView];
+}
+//点击评论按钮
+- (IBAction)handleCommentButton:(UIButton *)sender {
+    [self.scrollView setContentOffset:CGPointMake(kCSHScreenWidth * 2, 0)];
+    [self updateTabView];
+}
+
+#pragma mark - subview
+
+//切换三个按钮的颜色
+//改变小滑块的x值 移动滑块
+- (void)updateTabView {
+    //默认当前按钮是 详情按钮
+    UIButton *currentButton = self.detailButton;
+    
+    CGFloat offsetX = self.scrollView.contentOffset.x;
+    
+    CGFloat sliderViewOffsetXUnit = (kCSHScreenWidth - 2) / 3;
+    if (fabs(offsetX) < 5) {
+        self.sliderViewCenterXConstraint.constant = 0;
+    }
+    if (fabs(offsetX - kCSHScreenWidth) < 5) {
+        //切换到 照片按钮
+        currentButton = self.photoButton;
+        self.sliderViewCenterXConstraint.constant = sliderViewOffsetXUnit;
+    }
+    if (fabs(offsetX - kCSHScreenWidth * 2) < 5) {
+        //切换到 评论按钮
+        currentButton = self.commentButton;
+        self.sliderViewCenterXConstraint.constant = sliderViewOffsetXUnit * 2;
+    }
+    
+    [self.detailButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.photoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.commentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [currentButton setTitleColor:[UIColor csh_brandColor] forState:UIControlStateNormal];
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         [self.sliderView.superview layoutIfNeeded];
+                     }];
+}
+
+#pragma mark - configuration
+//给界面的名字 地址 距离等等赋值
+- (void)configureWithDevice:(CSHDevice *)device {
+    self.titleLabel.text = self.device.name;
+    self.summaryOnlineImageViw.image = !self.device.isCertified ? [UIImage imageNamed:@"uncertificated-icon"] : [UIImage imageNamed:@"certificated-icon"];
+    if (self.device.isOnline) {
+        self.summaryOnlineImageViw.image = [UIImage imageNamed:@"in-network-icon"];
+    }
+    
+    self.deviceAddressLabel.text = self.device.address;
+    
+    //这个方法来计算定位的位置与电站的距离
+    CLLocationDistance distance = [self.location distanceFromLocation:[[CLLocation alloc] initWithLatitude:self.device.coordinatePoint.latitude longitude:self.device.coordinatePoint.longitude]];
+    
+    self.distanceLabel.text = distance > 1000 ? [NSString stringWithFormat:@"%.1f km", distance / 1000.0f] : [NSString stringWithFormat:@"%.1f m", distance];
+    
+    self.deviceFeatureView.hidden = !self.device.isCertified;
+    
+    self.privateInfoLabel.text = self.device.isPrivate ? @"内部开放" : @"对外开放";
+    self.onlineChargingImageView.hidden = self.device.paymentMethod == CSHDevicePaymentMethodOther;
+    self.onlineChargingLabel.hidden = self.device.paymentMethod == CSHDevicePaymentMethodOther;
+    
+    self.uncertificatedWarningView.hidden = self.device.isCertified;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    //table，collection，scrollView 三个
+    if (scrollView != self.scrollView) {
+        return;
+    }
+    //decelerate=NO，停止拖动的时候
+    if (!decelerate) {
+        [self updateTabView];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView != self.scrollView) {
+        return;
+    }
+    [self updateTabView];//停止减速的时候
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (scrollView != self.scrollView) {
+        return;
+    }
+    [self updateTabView];//停止拖动的时候
+}
+
+#pragma mark - UITableViewDataSource
+//评论的table
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CSHChargingStationCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CSHChargingStationCommentTableViewCell class]) forIndexPath:indexPath];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+#pragma mark - UICollectionViewDataSource
+//图片 的collection
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 5;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CSHChargingStationPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CSHChargingStationPhotoCollectionViewCell class]) forIndexPath:indexPath];
+        CSHImage *image = self.device.images[indexPath.row];
+//        [cell.imageView sd_setImageWithURL:image.url];
+    return cell;
+}
+
+@end

@@ -1,0 +1,89 @@
+//
+//  CSHSettingsViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/28/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHSettingsViewController.h"
+#import "CSHFeedbackViewController.h"
+#import "CSHAboutUsViewController.h"
+
+@interface CSHSettingsViewController ()<UIAlertViewDelegate>
+//注销登录 button
+@property (weak, nonatomic) IBOutlet UIButton *exitBtn;
+
+@end
+
+@implementation CSHSettingsViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+//    [self.exitBtn setTitle:@"退出登录" forState:UIControlStateNormal];
+    self.title = @"设置";
+}
+//点击 退出登录按钮
+- (IBAction)exitBtnClicked:(UIButton *)sender {
+    
+//    [self backOut];
+    
+    //警告框
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定要退出吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",  nil];
+    alert.alertViewStyle=UIAlertViewStyleDefault;
+    [alert show];
+}
+//协议函数 响应事件
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) { //ok
+        [self backOut];
+    }else if (buttonIndex==0){//cancel
+        
+    }
+}
+-(void)backOut{
+    NSLog(@"退出登录");
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    
+    [defaults removeObjectForKey:@"accountId"];
+    
+    [defaults removeObjectForKey:@"userPhone"];
+    [defaults removeObjectForKey:@"userName"];
+    [defaults removeObjectForKey:@"userImage"];
+    
+    [defaults synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"accountId"]==nil) {
+        self.exitBtn.hidden=YES;
+    }else{
+        self.exitBtn.hidden=NO;
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        CSHFeedbackViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHFeedbackViewController class])];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        CSHAboutUsViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHAboutUsViewController class])];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+@end

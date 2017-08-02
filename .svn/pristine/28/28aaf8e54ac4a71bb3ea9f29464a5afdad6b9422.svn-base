@@ -1,0 +1,136 @@
+//
+//  CSHMyCollectionViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/28/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHMyCollectionViewController.h"
+#import "collectionCell.h"
+#import "CSHChargingStationViewController.h"
+#define screenW [UIScreen mainScreen].bounds.size.width
+#define screenH [UIScreen mainScreen].bounds.size.height
+
+#import "CSHDevice.h"
+#import <MapKit/MapKit.h>
+//#import "CSHCoordinatePoint.h"
+#import "CSHDevice.h"
+@interface CSHMyCollectionViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UITableView *table;
+@property(nonatomic,strong)NSMutableArray *dataArray;
+@end
+
+@implementation CSHMyCollectionViewController
+
+-(NSMutableArray *)dataArray{
+    if (_dataArray==nil) {
+        _dataArray=[[NSMutableArray alloc]init];
+        //这里应该是请求回来数据，然后forin遍历数组
+        for (int i=0; i<5; i++) {
+           CSHDevice *device=[[CSHDevice alloc]init];
+            device.name=@"device.name";
+            device.address=@"device.address";
+            device.count=@(2);
+            
+            device.isPrivate=NO;
+            device.isCertified=NO;
+            device.distance=@"100";
+            
+            [_dataArray addObject:device];
+            
+        }
+    }
+    return _dataArray;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    
+    self.title = @"我的收藏";
+    
+    self.table=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screenW, screenH-64)];
+    self.table.delegate=self;
+    self.table.dataSource=self;
+    self.table.tableFooterView=[[UIView alloc]initWithFrame:CGRectZero];
+//    self.table.bounces=NO;
+    self.table.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.table.showsVerticalScrollIndicator=NO;
+    self.table.showsHorizontalScrollIndicator=NO;
+    
+    self.table.backgroundColor=[UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1];
+    [self.view addSubview:self.table];
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+//    return 30;
+    return self.dataArray.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellID=@"collectionCellID";
+    collectionCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell==nil) {
+        cell=[[[NSBundle mainBundle]loadNibNamed:@"collectionCell" owner:self options:nil] firstObject];
+
+    }
+    CSHDevice *device=self.dataArray[indexPath.row];
+    
+    cell.nameLab.text=device.name;
+    cell.addressLab.text=device.address;
+    cell.numberLab.text=[NSString stringWithFormat:@"%@",device.count];
+    cell.distanceLab.text=[NSString stringWithFormat:@"%@km",device.distance];
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 110;
+}
+//有bug待解决
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CSHChargingStationViewController *vc=[[CSHChargingStationViewController alloc]init];
+    
+    
+   
+    // online
+    CSHDevice *device = [CSHDevice new];
+    //自定义的枚举
+//    //    device.areaType=CSHDeviceAreaTypeOther;
+//    CSHCoordinatePoint *coordinate = [CSHCoordinatePoint new];
+//    coordinate.latitude = latitude + 0.005;
+//    coordinate.longitude = longitude;
+    //武汉 文韬楼
+    device.coordinatePoint.latitude = 30.4893069294;
+    device.coordinatePoint.longitude=114.4208743175;
+    //红色
+    device.isOnline = YES;
+    device.isCertified = YES;
+    
+    device.isPrivate = NO;
+    device.name = @"武汉市聚点车间（对外）";
+    device.paymentMethod = CSHDevicePaymentMethodCard;
+    device.address = @"武汉市光谷大道国际企业中心一期";
+    
+    
+    //device，location，地图界面传值的时候传的，这里应该传一个ID
+    vc.device=device;
+    CLLocation *location=[[CLLocation alloc]initWithLatitude:30.4893069294 longitude:114.4208743175];
+    vc.location=location;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
+
+
+@end

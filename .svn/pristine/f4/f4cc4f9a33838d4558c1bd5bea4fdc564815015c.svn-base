@@ -1,0 +1,67 @@
+//
+//  CSHPreferenceTableViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/18/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHPreferenceTableViewController.h"
+#import "CSHCarBrandListViewController.h"
+
+@interface CSHPreferenceTableViewController () <CSHCarBrandListViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *homeAddressTextField;
+@property (weak, nonatomic) IBOutlet UITextField *companyAddressTextField;
+
+@property (weak, nonatomic) IBOutlet UIImageView *carLogoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *seriesLabel;
+
+@end
+
+@implementation CSHPreferenceTableViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - response to behavior
+
+- (IBAction)confirmButton:(UIButton *)sender {
+    //TODO: handle confirm button
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Menu" bundle:nil];
+        CSHCarBrandListViewController *brandListViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHCarBrandListViewController class])];
+        brandListViewController.delegate = self;
+        [self.navigationController pushViewController:brandListViewController animated:YES];
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - CSHCarBrandListViewControllerDelegate
+
+- (void)carBrandListViewControllerDidStopWithBrand:(NSString *)brand series:(NSString *)series {
+    [self.navigationController popToViewController:self animated:YES];
+    
+    //TODO: use true data
+    self.carLogoImageView.image = [UIImage imageNamed:@"icon_tesla"];
+    self.seriesLabel.text = series;
+}
+
+@end

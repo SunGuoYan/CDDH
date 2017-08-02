@@ -1,0 +1,619 @@
+//
+//  CSHMapViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 5/27/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHMapViewController.h"
+
+#import <CoreLocation/CoreLocation.h>
+
+#import <MapKit/MapKit.h>
+
+#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
+
+#import <Masonry/Masonry.h>
+#import "UIView+CornerRadius.h"
+
+#import "CSHChargingStationsViewController.h"
+#import "CSHChargingStationViewController.h"
+#import "CSHDevice.h"
+#import "CSHDeviceAnnotation.h"
+#import "CSHDeviceAnnotationView.h"
+
+@interface CSHMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, CSHChargingStationsViewControllerDelegate>
+{
+    double _latitude;
+    double _longitude;
+}
+// map and loading
+@property (weak, nonatomic) IBOutlet UIView *searchBarContainer;
+//地图  MKMapView
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+//全屏的UIView
+@property (weak, nonatomic) IBOutlet UIView *mapViewContainer;
+
+//等待加载符
+@property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
+
+
+// device summay views
+//设备概要图 背景
+@property (weak, nonatomic) IBOutlet UIView *deviceSummaryView;
+//收藏按钮
+@property (weak, nonatomic) IBOutlet UIButton *favoriteBtn;
+//分享按钮
+@property (weak, nonatomic) IBOutlet UIButton *shareBtn;
+
+//小横条
+@property (weak, nonatomic) IBOutlet UIView *deviceSummaryBackgroundView;
+@property (weak, nonatomic) IBOutlet UILabel *summaryTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *summaryOnlineImageViw;
+@property (weak, nonatomic) IBOutlet UIView *deviceFeatureView;
+@property (weak, nonatomic) IBOutlet UIButton *chargingRuleButton;
+@property (weak, nonatomic) IBOutlet UIImageView *onlineChargingImageView;
+@property (weak, nonatomic) IBOutlet UILabel *onlineChargingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *privateInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deviceAddressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UIView *uncertificatedWarningView;
+
+@property (weak, nonatomic) IBOutlet UIView *deviceChargingInfoView;
+
+//共2个电桩，2个空闲的 label
+@property (weak, nonatomic) IBOutlet UILabel *deviceChargingInfoLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *deviceParkingInfoLabel;
+//点亮label
+@property (weak, nonatomic) IBOutlet UILabel *lightUpLabel;
+//当没有认证（没联网的前提下），白色的的那个警告小横条
+@property (weak, nonatomic) IBOutlet UIView *deviceChargingUncertificatedWarningView;
+//导航 button ？？
+//估计是直接加的手势，下面有协议方法
+
+// layout constraints
+@property (strong, nonatomic) MASConstraint *deviceSummaryViewBottomConstraint;
+
+//CSHDeviceAnnotationView
+//自定义的类，代表地图上显示的大头针
+@property (assign, nonatomic) CSHDeviceAnnotationView *selecteAnnotationView;
+
+//是否聚焦到用户的位置
+@property (assign, nonatomic) BOOL shouldZoomToUserLocation;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property(strong,nonatomic)NSString *selectDeviceID;
+
+
+@end
+
+@implementation CSHMapViewController
+
+
+#pragma mark --- 点击收藏按钮 响应的事件
+- (IBAction)favoriteBtnClicked:(UIButton *)sender {
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    
+//    if (!self.favoriteBtn.selected)
+    if ([[defaults objectForKey:self.selectDeviceID] isEqualToString:@"YES"])//如果已经收藏
+    {
+        NSLog(@"取消");
+      [self.favoriteBtn setBackgroundImage:[UIImage imageNamed:@"icon_favs_normal"] forState:UIControlStateNormal];
+        
+        [defaults removeObjectForKey:self.selectDeviceID];
+        
+        [defaults synchronize];
+        
+        
+    }else{
+        NSLog(@"收藏");
+        [self.favoriteBtn setBackgroundImage:[UIImage imageNamed:@"icon_favs_press"] forState:UIControlStateNormal];
+        [defaults setObject:@"YES" forKey:self.selectDeviceID];
+       
+        [defaults synchronize];
+
+    }
+    self.favoriteBtn.selected=!self.favoriteBtn.selected;
+    
+}
+#pragma mark --- 点击分享按钮 响应的事件
+
+- (IBAction)shareBtnClicked:(UIButton *)sender {
+    
+    NSLog(@"分享");
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+//    self.favoriteBtn.hidden=YES;
+//    [self.favoriteBtn setBackgroundImage:[UIImage imageNamed:@"icon_favs_normal"] forState:UIControlStateNormal];
+    
+    
+    
+//    [self.favoriteBtn setImage:[UIImage imageNamed:@"icon_favs_normal"] forState:UIControlStateNormal];
+//    [self.favoriteBtn setImage:[UIImage imageNamed:@"icon_favs_press"] forState:UIControlStateSelected];
+    
+//    self.shareBtn.hidden=YES;
+    // Do any additional setup after loading the view.
+    
+    self.fd_prefersNavigationBarHidden = YES;
+    
+    //地图界面的  设备大背景图
+    [self.tabBarController.view addSubview:self.deviceSummaryView];
+    [self.deviceSummaryView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.tabBarController.view);
+        self.deviceSummaryViewBottomConstraint = make.bottom.equalTo(self.tabBarController.view).offset(kCSHHiddenSummaryViewBottomConstraintConstant);
+    }];
+    
+    self.searchBarContainer.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.searchBarContainer.layer.borderWidth = 0.5f;
+    [self.searchBarContainer csh_setDefaultCornerRadius];
+    [self.deviceSummaryBackgroundView csh_setDefaultCornerRadius];
+    
+    self.mapView.delegate = self;
+    
+    // 1 定位
+    [self locateUserOnMapViewIfPossible];
+    
+    // 2 点击地图 把设备概括图收藏起来
+    [self.mapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnMapViewGesture:)]];
+    
+    self.mapViewContainer.hidden = YES;
+    
+    NSArray<NSString *> *imageNames = @[@"progress001", @"progress002", @"progress003", @"progress004", @"progress005", @"progress006", @"progress007", @"progress008", @"progress009", @"progress010", @"progress011", @"progress012", @"progress013", @"progress014", @"progress015", @"progress016", @"progress017", @"progress018", @"progress019", @"progress020", @"progress021", @"progress022", @"progress023", @"progress024", @"progress025", @"progress026", @"progress027", @"progress028", @"progress029", @"progress030", @"progress031", @"progress032", @"progress033", @"progress034", @"progress035", @"progress036", @"progress037", @"progress038", @"progress039", @"progress040", @"progress041", @"progress042", @"progress043", @"progress044", @"progress045", @"progress046", @"progress047", @"progress048", @"progress049", @"progress050", @"progress051", @"progress052", @"progress053", @"progress054", @"progress055", @"progress056", @"progress057", @"progress058", @"progress059", @"progress060"];
+    NSMutableArray<UIImage *> *images = [@[] mutableCopy];
+    for (NSString *name in imageNames) {
+        [images addObject:[UIImage imageNamed:name]];
+    }
+    self.loadingImageView.animationImages = images;
+    self.loadingImageView.animationDuration = 2.0f;
+    self.loadingImageView.animationRepeatCount = CGFLOAT_MAX;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden = YES;
+    
+    
+}
+
+// 1 展示设备概括图
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    //如果大头针存在的话
+    if (self.selecteAnnotationView) {
+        //updateImage  调用的是CSHDeviceAnnotationView里面的方法
+        [self.selecteAnnotationView updateImage];
+        [self showDeviceSummaryViewWithDevice:self.selecteAnnotationView.device];
+    }
+    
+    if (self.shouldZoomToUserLocation) {
+        self.loadingImageView.hidden = NO;
+        [self.loadingImageView startAnimating];
+    }
+}
+
+// 2 收藏设备概括图
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self hideDeviceSummaryViewAnimated:NO Completion:nil];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 点击左下角的location的button 显示到当前位置 定位
+
+- (IBAction)locateButton:(UIButton *)sender {
+    if (self.mapView.userLocation.location) {
+        [self centerToCoordinate:self.mapView.userLocation.location.coordinate zoom:YES];
+    }
+    [self locateUserOnMapViewIfPossible];
+}
+#pragma mark - 点击右上角列表按钮：push到充电桩列表的界面
+
+- (IBAction)chargingStationsButton:(UIButton *)sender {
+    //这里传NO,表示隐藏搜索记录列表，显示设备列表
+    [self showChargingStationsViewControllerBeginEditing:NO];
+    [self hideDeviceSummaryViewAnimated:NO Completion:nil];
+    self.selecteAnnotationView = nil;
+}
+#pragma mark - 点击输入框按钮： push到查询界面
+
+- (IBAction)handleTextFieldButton:(UIButton *)sender {
+    [self showChargingStationsViewControllerBeginEditing:YES];
+    //传的是NO，并没有hideDeviceSummary，只是设置了MASConstraint
+    [self hideDeviceSummaryViewAnimated:NO Completion:nil];
+    self.selecteAnnotationView = nil;
+}
+
+#pragma mark - 点击设备概括图  push到详情页面
+
+- (IBAction)handleTapOnSummaryViewGestureRecognizer:(UITapGestureRecognizer *)sender {
+    [self showDeviceDetail];
+    
+}
+-(void)showDeviceDetail
+{
+    [self showDeviceDetailViewControllerWithDevice:self.selecteAnnotationView.device];
+    
+}
+
+#pragma mark - 点击 开始导航 响应的方法 
+
+- (IBAction)handleTapOnNavigationViewGesture:(UITapGestureRecognizer *)sender {
+    NSLog(@"navigation");
+    //TODO: navigation
+    NSLog(@"_latitude:%lf",_latitude);
+    NSLog(@"_longitude:%lf",_longitude);
+    
+    [self startNavigateWithLatitude:_latitude andLongitude:_longitude];
+}
+#pragma mark - 传入经纬度 开始导航
+-(void)startNavigateWithLatitude:(double)latitude andLongitude:(double)longitude
+{
+    //1，当前item
+    MKMapItem *currentItem = [MKMapItem mapItemForCurrentLocation];
+    
+    //金鑫国际
+    //    double latitude = 30.489306+0.005;
+    //    double longitude = 114.420874+0.005;
+    
+    //优网科技
+//    double latitude = 30.489306;
+//    double longitude = 114.420874;
+    
+    CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    //2，目的地item
+    MKMapItem *toItem = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:loc addressDictionary:nil]];
+    
+    //反地理编码
+    CLLocation *location = [[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
+    
+    CLGeocoder *geocoder=[[CLGeocoder alloc]init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error!=nil||placemarks.count==0) {
+            NSLog(@"%@",error);
+            return ;
+        }
+        toItem.name=placemarks.firstObject.name;
+        [MKMapItem openMapsWithItems:@[currentItem,toItem] launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+    }];
+}
+
+//添加点击手势  预约   待续
+- (IBAction)handleTapOnBookingViewGesture:(UITapGestureRecognizer *)sender {
+    //TODO: booking
+    NSLog(@"booking");
+}
+#pragma mark - 地图添加的点击手势  隐藏设备概括图
+- (void)handleTapOnMapViewGesture:(UITapGestureRecognizer *)tapGesture {
+    self.selecteAnnotationView = nil;
+    [self hideDeviceSummaryViewAnimated:YES Completion:nil];
+}
+
+#pragma mark - 添加大头针的方法二
+                /****************************/
+                /****      添加大头针     ****/
+                /***************************/
+//功能：地图上添加大头针显示设备
+// 368 行自己调用[self addAnno..];
+//用处：在地图的协议方法里面调用，
+- (void)addAnnotationsForDevices:(NSArray<CSHDevice *> *)devices {
+    
+    //这里是用枚举法遍历数组 数组指定了元素类型
+    [devices enumerateObjectsUsingBlock:^(CSHDevice * _Nonnull device, NSUInteger index, BOOL * _Nonnull stop) {
+        CSHDeviceAnnotation *annotation = [[CSHDeviceAnnotation alloc] initWithDevice:device];
+        [self.mapView addAnnotation:annotation];
+    }];
+}
+
+#pragma mark - navigate to view controllers
+//push到充电桩列表 正向传值  （点击搜索的textfield的时候调用）
+- (void)showChargingStationsViewControllerBeginEditing:(BOOL)shouldBeginEditing {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CSHChargingStationsViewController *chargingStationsViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHChargingStationsViewController class])];
+    
+    chargingStationsViewController.location = self.mapView.userLocation.location;
+    chargingStationsViewController.shouldBeginEditing = shouldBeginEditing;
+    //此处的delegate是逆向传值的时候建立代理关系，应该还有一个方法的
+    chargingStationsViewController.delegate = self;
+    [self.navigationController pushViewController:chargingStationsViewController animated:YES];
+}
+
+//点击设备概要图响应的方法 跳转到详情页面
+//正向传值 传的是选中的device和userLocation（用作关键字搜索的时候与自己最近的距离排序）
+- (void)showDeviceDetailViewControllerWithDevice:(CSHDevice *)device {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CSHChargingStationViewController *chargingStationViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHChargingStationViewController class])];
+    
+    //这里的device不是传进来的device？？
+    //这里是正向传值 把当前选中的device和自己的location传给 详情界面
+    chargingStationViewController.device = self.selecteAnnotationView.device;
+    chargingStationViewController.location = self.mapView.userLocation.location;
+    
+    [self.navigationController pushViewController:chargingStationViewController animated:YES];
+}
+
+#pragma mark - location feature
+//viewDidLoad 里面调用的方法  定位
+- (void)locateUserOnMapViewIfPossible {
+    
+    self.shouldZoomToUserLocation = YES;//初始化为YES
+    
+    switch ([CLLocationManager authorizationStatus]) {
+        case kCLAuthorizationStatusRestricted:
+            NSLog(@"没有定位权限");
+            break;
+            
+        case kCLAuthorizationStatusDenied: {
+            NSLog(@"没有定位权限");
+            break;
+        }
+            
+        case kCLAuthorizationStatusNotDetermined: {
+            NSLog(@"定位权限 ** request");
+            [self.locationManager requestWhenInUseAuthorization];
+            break;
+        }
+            
+        default: {
+            if ([CLLocationManager locationServicesEnabled]) {
+                // self.mapView.showsUserLocation=YES;
+                [self.mapView setShowsUserLocation:YES];
+            } else {
+                NSLog(@"定位没有打开");
+            }
+        }
+            break;
+    }
+}
+        /*         在地图显示到传入坐标的位置      */
+
+//1，点击地图左下角定位按钮 调用
+//2,定位完成的时候调用
+//3,点击大头针的时候调用
+- (void)centerToCoordinate:(CLLocationCoordinate2D)coordinate zoom:(BOOL)zoom {
+    MKCoordinateSpan span = zoom ? MKCoordinateSpanMake(0.02, 0.02) : self.mapView.region.span;
+    
+    MKCoordinateRegion mapRegion = MKCoordinateRegionMake(coordinate, span);
+    [self.mapView setRegion:mapRegion animated:YES];
+    
+    if (self.shouldZoomToUserLocation) {
+        self.shouldZoomToUserLocation = NO;
+    }
+}
+
+#pragma mark - CLLocationManagerDelegate
+//定位  CLLocationManager的协议方法
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    switch (status) {
+        case kCLAuthorizationStatusDenied: {
+            if ([CLLocationManager locationServicesEnabled]) {
+                NSLog(@"定位开启，但被拒绝");
+            } else {
+                NSLog(@"定位关闭，不可用");
+            }
+            
+            break;
+        }
+            
+            
+        default: {
+            [self.mapView setShowsUserLocation:YES];
+            break;
+        }
+    }
+}
+
+#pragma mark - 展开设备概括图
+//
+//传入device 并且赋值
+
+//1，点击大头针的时候调用
+//2,viewDidAppear 里面调用 ？？第一次DidAppear中selecteAnnotationView一直没有初始化啊！
+- (void)showDeviceSummaryViewWithDevice:(CSHDevice *)device {
+    self.deviceSummaryViewBottomConstraint.offset = 0;
+    self.deviceSummaryView.alpha = 1;
+    [self.deviceSummaryView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.tabBarController.view).offset(0);
+    }];
+    //把概括总图放到最上层 并设置相关控件的内的内容
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.deviceSummaryView.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        //放到最上面，能把四个tabBar盖住
+        [self.tabBarController.view bringSubviewToFront:self.deviceSummaryView];
+    }];
+    
+    // configure device
+    
+    self.summaryTitleLabel.text = device.name;
+    self.summaryOnlineImageViw.image = !device.isCertified ? [UIImage imageNamed:@"uncertificated-icon"] : [UIImage imageNamed:@"certificated-icon"];
+    if (device.isOnline) {
+        self.summaryOnlineImageViw.image = [UIImage imageNamed:@"in-network-icon"];
+    }
+    
+    self.deviceAddressLabel.text = device.address;
+    CLLocationDistance distance = [self.mapView.userLocation.location distanceFromLocation:[[CLLocation alloc] initWithLatitude:device.coordinatePoint.latitude longitude:device.coordinatePoint.longitude]];
+    
+#pragma mark --- 计算定位于device的distance
+    self.distanceLabel.text = distance > 1000 ? [NSString stringWithFormat:@"%.1f km", distance / 1000.0f] : [NSString stringWithFormat:@"%.1f m", distance];
+    
+    
+    self.deviceFeatureView.hidden = !device.isCertified;
+    self.deviceChargingInfoView.hidden = !device.isCertified;
+    
+    self.privateInfoLabel.text = device.isPrivate ? @"内部开放" : @"对外开放";
+    self.onlineChargingImageView.hidden = device.paymentMethod == CSHDevicePaymentMethodOther;
+    self.onlineChargingLabel.hidden = device.paymentMethod == CSHDevicePaymentMethodOther;
+    
+    self.uncertificatedWarningView.hidden = device.isCertified;
+    self.deviceChargingUncertificatedWarningView.hidden = device.isCertified;
+    
+    
+    self.lightUpLabel.text=@"详情";
+//    self.lightUpLabel.textColor = !device.isCertified ? [UIColor blackColor] : [UIColor lightGrayColor];
+    //1.单击手势
+    UITapGestureRecognizer *tapOne=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showDeviceDetail)];
+    //设置点击次数
+    tapOne.numberOfTapsRequired=1;//默认1
+    //设置手指个数
+    tapOne.numberOfTouchesRequired=1;//默认1
+    [self.lightUpLabel addGestureRecognizer:tapOne];
+}
+
+static const CGFloat kCSHHiddenSummaryViewBottomConstraintConstant = 300;
+
+//把设备概要图收藏起来
+//1， viewWillDisappear 里面调用的方法
+//2，push到stations的时候调用了 2次（输入框+右上角图标）
+//3，点击地图的时候 收起
+//4，点击大头针时候调用（然后又收起）
+- (void)hideDeviceSummaryViewAnimated:(BOOL)animated Completion:(void (^)(void))completion {
+    //设置 MASConstraint
+    self.deviceSummaryViewBottomConstraint.offset = kCSHHiddenSummaryViewBottomConstraintConstant;
+    
+    if (animated) {//传YES，就hideDeviceSummaryView
+        [UIView animateWithDuration:0.3 animations:^{
+            self.deviceSummaryView.alpha = 0;
+            [self.deviceSummaryView.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            if (completion) {
+                completion();
+            }
+        }];
+    }
+}
+
+#pragma mark - CSHChargingStationsViewControllerDelegate
+
+// 逆向传值对应的delegate的对应的方法
+//从stations界面pop返回到首页
+- (void)chargingStationsViewControllerDidStop {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+            /****************************/
+            /****      添加大头针     ****/
+            /***************************/
+
+//拉取网络数据，解析成为带device的数组传进来
+#pragma mark - 添加大头针的方法一
+#pragma mark - MKMapViewDelegate
+//地图 系统的协议方法  当地图获取到用户位置时调用
+//1，在地图上显示大头针（需传入装有device的数组）
+//2，定位到当前位置
+//3, loadingImageView 在viewDidLoad中开始的，在定位成功后stop并且hidden
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    
+    //如果定位到了用户
+    // viewDidLoad中，shouldZoomToUserLocation初始化为YES
+    if (self.shouldZoomToUserLocation) {
+        
+        [self.loadingImageView stopAnimating];
+        self.loadingImageView.hidden = YES;
+        
+        //viewDidLoad中，hidden初始化为了YES
+        if (self.mapViewContainer.hidden) {
+
+            self.mapViewContainer.hidden = NO;
+            
+            //TODO: remove
+            //地图上添加大头针显示设备 传入的是数组
+            [self addAnnotationsForDevices:[CSHDevice testDevices]];
+        }
+        //在地图显示到传入坐标的位置 （此处即是定位）
+        [self centerToCoordinate:userLocation.location.coordinate zoom:YES];
+    }
+}
+#pragma mark - MKMapViewDelegate
+//大头针复用
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+    if (![annotation isKindOfClass:[CSHDeviceAnnotation class]]) {
+        return nil;//如果不是CSHDeviceAnnotation类的话就返回nil
+    }
+    
+    CSHDeviceAnnotationView *annotationView = (CSHDeviceAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:NSStringFromClass([CSHDeviceAnnotationView class])];
+    if (!annotationView) {
+        annotationView = [[CSHDeviceAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:NSStringFromClass([CSHDeviceAnnotationView class])];
+    }
+    //updateImage 这里调用的是CSHDeviceAnnotationView自己的方法
+    //每次生成大头针的时候 更新大头针的颜色 红 白 蓝
+    [annotationView updateImage];
+    
+    return annotationView;
+}
+
+#pragma mark - MKMapViewDelegate
+#pragma mark - 点击大头针响应的方法
+//MKAnnotationView 的点击事件
+//1,展开设备概括图
+//2，地图聚焦到当前位置
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    if (![view.annotation isKindOfClass:[CSHDeviceAnnotation class]] && ![view isKindOfClass:[CSHDeviceAnnotationView class]]) {
+        return;
+    }
+    
+    //找到大头针所对应的device
+    CSHDevice *device = ((CSHDeviceAnnotation *)view.annotation).device;
+    
+    self.selectDeviceID=[NSString stringWithFormat:@"%@",device.deviceId];
+    
+#pragma mark - 收藏 五角星的颜色问题
+//    if (self.selectDeviceID==nil) {
+//        self.selectDeviceID=@"initial";
+//    }
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:self.selectDeviceID]!=nil) {
+        [self.favoriteBtn setBackgroundImage:[UIImage imageNamed:@"icon_favs_press"] forState:UIControlStateNormal];
+    }else{
+        [self.favoriteBtn setBackgroundImage:[UIImage imageNamed:@"icon_favs_normal"] forState:UIControlStateNormal];
+    }
+    
+    
+    _latitude=device.coordinatePoint.latitude;
+    _longitude=device.coordinatePoint.longitude;
+    
+    if (self.selecteAnnotationView) {
+        
+        __weak typeof(self) weakSelf = self;
+        
+        [self hideDeviceSummaryViewAnimated:YES Completion:^{
+            [weakSelf showDeviceSummaryViewWithDevice:device];
+        }];
+    } else {
+        [self showDeviceSummaryViewWithDevice:device];
+    }
+    self.selecteAnnotationView = (CSHDeviceAnnotationView *)view;
+   // CSHDeviceAnnotationView 继承自MKAnnotationView，带有device的属性
+    [self centerToCoordinate:view.annotation.coordinate zoom:NO];
+}
+
+#pragma mark - getters and setters
+//属性 locationManager懒加载
+//用来判断是否有定位权限
+- (CLLocationManager *)locationManager {
+    if (!_locationManager) {
+        _locationManager = [CLLocationManager new];
+        _locationManager.delegate = self;
+        _locationManager.distanceFilter = kCLLocationAccuracyBestForNavigation;
+    }
+    return _locationManager;
+}
+
+@end

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="172" id="KGk-i7-Jjw" customClass="CSHRechargeRecordTableCell">
+            <rect key="frame" x="0.0" y="0.0" width="404" height="172"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="404" height="171.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYc-mU-ln2" customClass="CSHRechargeRecordTableCell">
+                        <rect key="frame" x="10" y="5" width="384" height="161.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充值" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPG-GN-NPb">
+                                <rect key="frame" x="10" y="10" width="80" height="21"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="UIG-ct-RH8"/>
+                                    <constraint firstAttribute="width" constant="80" id="riM-ua-fbE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2008-12-12 16:23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZW-tN-8lT">
+                                <rect key="frame" x="10" y="41" width="150" height="21"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="H54-Fo-NWD"/>
+                                    <constraint firstAttribute="height" constant="21" id="z6g-le-KBY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MPG-GN-NPb" firstAttribute="top" secondItem="rYc-mU-ln2" secondAttribute="top" constant="10" id="1Yt-6P-FV9"/>
+                            <constraint firstItem="cZW-tN-8lT" firstAttribute="leading" secondItem="rYc-mU-ln2" secondAttribute="leading" constant="10" id="1Zs-O7-nS9"/>
+                            <constraint firstItem="cZW-tN-8lT" firstAttribute="top" secondItem="MPG-GN-NPb" secondAttribute="bottom" constant="10" id="QIV-Kz-Xcl"/>
+                            <constraint firstItem="MPG-GN-NPb" firstAttribute="leading" secondItem="rYc-mU-ln2" secondAttribute="leading" constant="10" id="pe9-gV-h0F"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rYc-mU-ln2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="FEP-nN-YIx"/>
+                    <constraint firstAttribute="bottom" secondItem="rYc-mU-ln2" secondAttribute="bottom" constant="5" id="fVL-S7-xWe"/>
+                    <constraint firstItem="rYc-mU-ln2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="fe4-de-sTm"/>
+                    <constraint firstAttribute="trailing" secondItem="rYc-mU-ln2" secondAttribute="trailing" constant="10" id="hXg-Nb-BIA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="338" y="333"/>
+        </tableViewCell>
+    </objects>
+</document>

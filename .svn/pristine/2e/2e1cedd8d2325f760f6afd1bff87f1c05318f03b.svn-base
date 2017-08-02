@@ -1,0 +1,332 @@
+//
+//  CSHLoginViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/4/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+//登录界面 带注册字样
+
+#import "AFNetworking.h"
+#import "MBProgressHUD+MJ.h"
+//#import "KVNProgress.h"
+//#import "commonUtils.h"
+
+#import "CSHLoginViewController.h"
+#import "UIView+CornerRadius.h"
+#import "UIButton+CSHLogin.h"
+#import "CSHResetPasswordViewController.h"
+#import "CSHSignupViewController.h"
+
+@interface CSHLoginViewController ()
+
+@property (weak, nonatomic) IBOutlet UIView *inputContainerView;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *weiXinIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *weiBoIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *QQIcon;
+
+@property (weak, nonatomic) IBOutlet UILabel *weiXinLab;
+@property (weak, nonatomic) IBOutlet UILabel *weiBoLab;
+
+@property (weak, nonatomic) IBOutlet UILabel *QQLab;
+
+@property (weak, nonatomic) IBOutlet UILabel *chooseThirdLoginLab;
+
+@property (weak, nonatomic) IBOutlet UIView *lineA;
+
+@property (weak, nonatomic) IBOutlet UIView *lineB;
+
+
+
+
+@end
+
+@implementation CSHLoginViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.phoneTextField.keyboardType=UIKeyboardTypeNumberPad;
+    
+    self.weiXinIcon.hidden=YES;
+    self.weiXinLab.hidden=YES;
+    self.weiBoIcon.hidden=YES;
+    self.weiBoLab.hidden=YES;
+    self.QQIcon.hidden=YES;
+    self.QQLab.hidden=YES;
+    self.chooseThirdLoginLab.hidden=YES;
+    self.lineA.hidden=YES;
+    self.lineB.hidden=YES;
+    
+    
+    self.loginButton.backgroundColor=[UIColor colorWithRed:0 green:0.71 blue:0.69 alpha:1];
+    
+    
+//    self.phoneTextField.delegate = self;
+//    self.passwordTextField.delegate = self;
+    
+    [self.inputContainerView csh_setDefaultCornerRadius];
+    [self.loginButton csh_setDefaultCornerRadius];
+    
+//    [self.loginButton csh_disableWithLoginAppearance];
+    
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - response to behavior
+
+//判断是否是有效的手机号
+- (BOOL)isValidPhoneNumber:(NSString *)phoneNumber {
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^1\\d{10}$"];
+    return [phoneTest evaluateWithObject:phoneNumber];
+}
+
+//2，点击登录  按钮相应的事件
+- (IBAction)handleLoginButton:(UIButton *)sender {
+    [self login];
+//    [self test];
+}
+-(void)login{
+    /*
+     //登录之后获取用户信息
+     */
+    NSString *urlStr=@"http://120.52.12.203:8100/oauth/token";
+    NSDictionary *para=@{@"grant_type":@"password",@"phone":self.phoneTextField.text,@"password":self.passwordTextField.text};
+    
+    if ([self.phoneTextField.text isEqualToString:@""]) {
+        [MBProgressHUD showError:@"手机号不能为空！"];
+        return;
+    }
+    if ([self isValidPhoneNumber:self.phoneTextField.text]==NO) {
+        [MBProgressHUD showError:@"手机号格式错误！"];
+        return;
+    }
+    if ([self.passwordTextField.text isEqualToString:@""]) {
+        [MBProgressHUD showError:@"密码不能为空！"];
+        return;
+    }
+    NSLog(@"para:%@",para);
+    
+    AFHTTPRequestOperationManager *_operation = [AFHTTPRequestOperationManager  manager];
+    
+    _operation.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/xml",@"text/plain",@"application/json",nil];
+    
+    [_operation.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [_operation.requestSerializer setValue:@"Basic eW91ZXRvbmctYW5kcm9pZDpzZWNyZXQ=" forHTTPHeaderField:@"Authorization"];
+    
+    [_operation POST:urlStr parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"responseObject:%@",responseObject);
+        
+        NSString *token=responseObject[@"access_token"];
+        NSLog(@"\n");
+        NSLog(@"token:%@",token);
+        NSLog(@"\n");
+        
+        if (token!=nil) {
+            
+            [MBProgressHUD showSuccess:@"登录成功"];
+            
+            //记录登录状态
+            NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+            [defaults setObject:@"YES" forKey:@"accountId"];
+            [defaults setObject:token forKey:@"access_token"];
+            [defaults synchronize];
+            
+            NSString *userBaseUrl=@"http://192.168.3.82:8100/api/account/?access_token=";
+            NSString *userUrl=[NSString stringWithFormat:@"%@%@",userBaseUrl,token];
+            NSLog(@"userUrl:%@",userUrl);
+            NSLog(@"\n");
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager  manager];
+            
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/xml",@"text/plain",@"application/json",nil];
+            
+            [manager GET:userUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                NSLog(@"(user)responseObject:%@",responseObject);
+                NSLog(@"\n");
+                //获取用户基本信息
+                NSString *nickname=responseObject[@"nickname"];
+                NSString *phone=responseObject[@"phone"];
+                NSString *imageUrlStr=responseObject[@"avatar"];
+                NSLog(@"%@",nickname);
+                NSLog(@"%@",phone);
+                NSLog(@"%@",imageUrlStr);
+                
+                
+                //                if (nickname==nil) {
+                nickname=@"阳光初夏";
+                //                }
+                //                if (phone==nil) {
+                phone=@"13657229663";
+                //                }
+                //                if (imageUrlStr==nil) {
+                //金毛的头像
+                imageUrlStr=@"http://e.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=01d3671a962397ddc274905638ebd9d2/d31b0ef41bd5ad6eb92f3a1786cb39dbb7fd3c7c.jpg";
+                //                }
+                
+                
+                //保存用户基本信息
+                NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+                [defaults setObject:nickname forKey:@"userName"];
+                [defaults setObject:phone forKey:@"userPhone"];
+                [defaults setObject:imageUrlStr forKey:@"userImage"];
+                [defaults synchronize];
+                
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"(user)error:%@",error);
+            }];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            [MBProgressHUD showError:@"手机号或密码错误！"];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        NSLog(@"error:%@",error);
+        [MBProgressHUD showError:@"登录失败！！"];
+        
+    }];
+}
+
+-(void)test{
+    /*
+     //登录之后获取用户信息
+     
+     curl -H 'Authorization: Basic eW91ZXRvbmctYW5kcm9pZDpzZWNyZXQ=' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=password&phone=17786467927&password=wg' http://localhost:8100/oauth/token
+     192.168.3.245
+     */
+    NSString *urlStr=@"http://192.168.3.82:8100/oauth/token";
+    NSDictionary *para=@{@"grant_type":@"password",@"phone":@"13657229663",@"password":@"tomm"};
+    
+    AFHTTPRequestOperationManager *_operation = [AFHTTPRequestOperationManager  manager];
+    
+    _operation.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/xml",@"text/plain",@"application/json",nil];
+    
+    [_operation.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [_operation.requestSerializer setValue:@"Basic eW91ZXRvbmctYW5kcm9pZDpzZWNyZXQ=" forHTTPHeaderField:@"Authorization"];
+    
+    //开启主线程
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        
+//    });
+    
+    
+    
+    [_operation POST:urlStr parameters:para success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+        NSLog(@"responseObject:%@",responseObject);
+        
+        
+        NSString *token=responseObject[@"access_token"];
+        NSLog(@"\n");
+        NSLog(@"token:%@",token);
+        NSLog(@"\n");
+        
+        if (token!=nil) {
+            
+            [MBProgressHUD showSuccess:@"登录成功"];
+            
+            //记录登录状态
+            NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+            [defaults setObject:@"YES" forKey:@"accountId"];
+            [defaults synchronize];
+            
+            NSString *userBaseUrl=@"http://192.168.3.82:8100/api/account/?access_token=";
+            NSString *userUrl=[NSString stringWithFormat:@"%@%@",userBaseUrl,token];
+            NSLog(@"userUrl:%@",userUrl);
+            NSLog(@"\n");
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager  manager];
+            
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/xml",@"text/plain",@"application/json",nil];
+            
+            [manager GET:userUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                NSLog(@"(user)responseObject:%@",responseObject);
+                NSLog(@"\n");
+                //获取用户基本信息
+                NSString *nickname=responseObject[@"nickname"];
+                NSString *phone=responseObject[@"phone"];
+                NSString *imageUrlStr=responseObject[@"avatar"];
+                NSLog(@"%@",nickname);
+                NSLog(@"%@",phone);
+                NSLog(@"%@",imageUrlStr);
+                
+                
+                //                if (nickname==nil) {
+                nickname=@"阳光初夏";
+                //                }
+                //                if (phone==nil) {
+                phone=@"13657229663";
+                //                }
+                //                if (imageUrlStr==nil) {
+                //金毛的头像
+                imageUrlStr=@"http://e.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=01d3671a962397ddc274905638ebd9d2/d31b0ef41bd5ad6eb92f3a1786cb39dbb7fd3c7c.jpg";
+                //                }
+                
+                
+                //保存用户基本信息
+                NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+                [defaults setObject:nickname forKey:@"userName"];
+                [defaults setObject:phone forKey:@"userPhone"];
+                [defaults setObject:imageUrlStr forKey:@"userImage"];
+                [defaults synchronize];
+                
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"(user)error:%@",error);
+            }];
+            
+            //            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            [MBProgressHUD showError:@"登录失败！"];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        NSLog(@"error:%@",error);
+        [MBProgressHUD showError:@"网络错误！"];
+        
+    }];
+}
+
+- (IBAction)handleTapOnQQGesture:(UITapGestureRecognizer *)sender {
+}
+
+- (IBAction)handleTapOnWeiboGesture:(UITapGestureRecognizer *)sender {
+}
+
+- (IBAction)handleTapOnWeChatGesture:(UITapGestureRecognizer *)sender {
+}
+//1，注册按钮  sign up push到注册界面
+- (IBAction)handleSignupButton:(UIBarButtonItem *)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    CSHSignupViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHSignupViewController class])];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+//3，忘记密码  push到重置密码界面
+- (IBAction)handleResetPasswordButton:(UIButton *)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    CSHResetPasswordViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHResetPasswordViewController class])];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+@end

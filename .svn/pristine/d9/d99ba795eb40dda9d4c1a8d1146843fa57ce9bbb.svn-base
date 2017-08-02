@@ -1,0 +1,47 @@
+//
+//  CSHStartingStationVC.m
+//  ChargingStationHelper
+//
+//  Created by SunGuoYan on 16/8/18.
+//  Copyright © 2016年 com.iycharge. All rights reserved.
+//
+
+#import "CSHStartingStationVC.h"
+
+@interface CSHStartingStationVC ()
+
+@end
+
+@implementation CSHStartingStationVC
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tabBarController.tabBar setHidden:YES];
+    //我的隐藏tabBar的思路
+    //    self.tabBarController.tabBar.hidden=YES;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.tabBarController.tabBar setHidden:YES];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,116 @@
+//
+//  CSHCarBrandListViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/18/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHCarBrandListViewController.h"
+#import "CSHCarBrandTableViewCell.h"
+#import "CSHCarSeriesViewController.h"
+
+@interface CSHCarBrandListViewController () <CSHCarSeriesViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, copy) NSString *selectedBrand;
+
+@end
+
+@implementation CSHCarBrandListViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"请选择";
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CSHCarBrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CSHCarBrandTableViewCell class]) forIndexPath:indexPath];
+    
+    cell.brandLabel.text = @"Tesla";
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CSHCarBrandTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    self.selectedBrand = cell.brandLabel.text;
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Menu" bundle:nil];
+    CSHCarSeriesViewController *carSeriesViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHCarSeriesViewController class])];
+    carSeriesViewController.delegate = self;
+    //TODO: change to real data
+    carSeriesViewController.brand = @"Tesla";
+    carSeriesViewController.series = @[@"Model S", @"Model 3", @"Model X®"];
+    [self.navigationController pushViewController:carSeriesViewController animated:YES];
+}
+
+#pragma mark - CSHCarSeriesViewControllerDelegate
+
+- (void)carSeriesViewControllerDidStopWithSeries:(NSString *)series {
+    [self.delegate carBrandListViewControllerDidStopWithBrand:self.selectedBrand series:series];
+}
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,31 @@
+//
+//  CSHPrefix.pch
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/20/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#ifndef CSHPrefix_pch
+#define CSHPrefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+#import "CSHUtils.h"
+#import "UIColor+CSH.h"
+#import "UIView+CornerRadius.h"
+#import "UIStoryboard+CSH.h"
+
+#import "AFNetworking.h"
+#import "MBProgressHUD+MJ.h"
+
+#define baseUrl @"http://120.52.12.203:8100"  //公网
+//#define baseUrl @"http://192.168.3.134:8100"  //王彬IP
+
+
+#endif
+
+#endif /* CSHPrefix_pch */

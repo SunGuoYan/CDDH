@@ -1,0 +1,21 @@
+//
+//  CSHChargingStationViewController.h
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 3/14/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+//搜索结果Cell点击之后跳转到 充电点详情 页面
+#import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+
+@class CSHDevice;
+
+// device detail
+@interface CSHChargingStationViewController : UIViewController
+//属性是CSHMapViewController 从首页正向传值  给详情页面的基本信息赋值
+@property (nonatomic, strong) CSHDevice *device;
+@property (nonatomic, strong) CLLocation *location;
+
+@end

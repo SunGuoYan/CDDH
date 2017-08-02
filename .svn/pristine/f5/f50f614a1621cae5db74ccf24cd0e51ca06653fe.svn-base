@@ -1,0 +1,94 @@
+//
+//  CSHDriverCertificatingViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/20/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHDriverCertificatingViewController.h"
+#import "CSHProvinceSelectionViewController.h"
+#import "CSHCarBrandListViewController.h"
+
+@interface CSHDriverCertificatingViewController () <UITableViewDelegate, CSHProvinceSelectionViewControllerDelegate, CSHCarBrandListViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *provinceNameButton;
+@property (weak, nonatomic) IBOutlet UIImageView *carLogoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *carSeriesLabel;
+
+@end
+
+@implementation CSHDriverCertificatingViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"车主认证";
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - response to behavior
+
+- (IBAction)handleProvinceNameButton:(UIButton *)sender {
+    CSHProvinceSelectionViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHProvinceSelectionViewController class])];
+    viewController.delegate = self;
+    viewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (IBAction)handleConfirmButton:(UIButton *)sender {
+    //TODO: handle confirm button
+}
+
+#pragma mark - UITabelViewDelegate
+//Cell的点击事件对应的方法
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        CSHCarBrandListViewController *viewController = [[UIStoryboard csh_menuStoryboard] instantiateViewControllerWithIdentifier:NSStringFromClass([CSHCarBrandListViewController class])];
+        viewController.delegate = self;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 5.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+#pragma mark - CSHProvinceSelectionViewControllerDelegate
+
+- (void)provinceSelectionViewControllerDidStop {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)provinceSelectionViewControllerDidStopWithName:(NSString *)name {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.provinceNameButton setTitle:name forState:UIControlStateNormal];
+}
+
+#pragma mark - CSHCarBrandListViewControllerDelegate
+
+- (void)carBrandListViewControllerDidStopWithBrand:(NSString *)brand series:(NSString *)series {
+    //TODO: remove test data
+    self.carLogoImageView.image = [UIImage imageNamed:@"icon_bmw"];
+    self.carSeriesLabel.text = series;
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+@end

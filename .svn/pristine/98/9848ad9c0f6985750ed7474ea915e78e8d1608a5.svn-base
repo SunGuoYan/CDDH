@@ -1,0 +1,53 @@
+//
+//  CSHBalanceViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 7/19/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+#import "CSHBalanceViewController.h"
+#import "CSHPaymentViewController.h"
+
+#import "CSHPayMoneyVC.h"
+
+@interface CSHBalanceViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *balance;
+
+@end
+
+@implementation CSHBalanceViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    self.title = @"我的钱包";
+    self.balance.text=@"15.00";
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //充值成功后修改
+    self.balance.text=@"15.00";
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+    
+}
+// 点击充值按钮  push到 钱包充值界面
+- (IBAction)handlePaymentButton:(UIButton *)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Menu" bundle:nil];
+    CSHPayMoneyVC *paymentViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHPayMoneyVC class])];
+    [self.navigationController pushViewController:paymentViewController animated:YES];
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Menu" bundle:nil];
+//    CSHPaymentViewController *paymentViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CSHPaymentViewController class])];
+//    [self.navigationController pushViewController:paymentViewController animated:YES];
+    
+}
+
+
+@end

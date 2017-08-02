@@ -1,0 +1,137 @@
+//
+//  CSHPayMoneyVC.m
+//  ChargingStationHelper
+//
+//  Created by SunGuoYan on 16/9/5.
+//  Copyright © 2016年 com.iycharge. All rights reserved.
+//
+
+#import "CSHPayMoneyVC.h"
+
+@interface CSHPayMoneyVC ()
+{
+    UIColor *initialGray;
+    UIColor *themeColor;
+}
+
+@property (weak, nonatomic) IBOutlet UIButton *btna;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnb;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnc;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnd;
+
+@property (weak, nonatomic) IBOutlet UIButton *btne;
+@property (weak, nonatomic) IBOutlet UIButton *btnf;
+
+@property (weak, nonatomic) IBOutlet UITextField *totalMoneyTF;
+
+//两个icon
+@property (weak, nonatomic) IBOutlet UIImageView *alipayIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *weixinPayIcon;
+
+//两个选择按钮
+@property (weak, nonatomic) IBOutlet UIButton *chooseAlipay;
+@property (weak, nonatomic) IBOutlet UIButton *chooseWeiXinPay;
+//总面额
+@property (weak, nonatomic) IBOutlet UILabel *totalMoneyLab;
+@property (weak, nonatomic) IBOutlet UIButton *payBtn;
+
+@end
+
+@implementation CSHPayMoneyVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //浅灰色
+    initialGray=[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+    
+    themeColor=[UIColor colorWithRed:0 green:0.71 blue:0.69 alpha:1];
+    
+    self.btna.backgroundColor=themeColor;
+    
+    self.btnb.backgroundColor=initialGray;
+    self.btnc.backgroundColor=initialGray;
+    self.btnd.backgroundColor=initialGray;
+    self.btne.backgroundColor=initialGray;
+    self.btnf.backgroundColor=initialGray;
+    
+    self.totalMoneyTF.text=@"30";
+    
+    self.totalMoneyLab.text=[NSString stringWithFormat:@"%@.00",self.totalMoneyTF.text];
+    self.payBtn.backgroundColor=themeColor;
+    
+    
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
+
+
+
+- (IBAction)btnaClicked:(UIButton *)sender {
+    [self changeWithButton:sender];
+    [self changeTotalTFAndLab:@"30"];
+    
+}
+
+- (IBAction)btnbClicked:(UIButton *)sender {
+    [self changeWithButton:sender];
+    [self changeTotalTFAndLab:@"50"];
+}
+
+- (IBAction)btncClicked:(UIButton *)sender {
+    [self changeWithButton:sender];
+    [self changeTotalTFAndLab:@"100"];
+}
+
+- (IBAction)btndClicked:(UIButton *)sender {
+    [self changeWithButton:sender];
+    [self changeTotalTFAndLab:@"200"];
+}
+
+- (IBAction)btneClicked:(UIButton *)sender {
+    [self changeWithButton:sender];
+    [self changeTotalTFAndLab:@"300"];
+}
+- (IBAction)btnfClicked:(UIButton *)sender {
+    [self changeWithButton:sender];
+    [self changeTotalTFAndLab:@"500"];
+}
+-(void)changeWithButton:(UIButton *)button{
+    self.btna.backgroundColor=initialGray;
+    self.btnb.backgroundColor=initialGray;
+    self.btnc.backgroundColor=initialGray;
+    self.btnd.backgroundColor=initialGray;
+    self.btne.backgroundColor=initialGray;
+    self.btnf.backgroundColor=initialGray;
+    
+    button.backgroundColor=themeColor;
+}
+-(void)changeTotalTFAndLab:(NSString *)number{
+    self.totalMoneyTF.text=number;
+    self.totalMoneyLab.text=[NSString stringWithFormat:@"%@.00",number];
+}
+
+//选择支付宝
+- (IBAction)chooseAlipayBtnClicked:(UIButton *)sender {
+    
+    self.alipayIcon.image=[UIImage imageNamed:@"icon_pay_checked"];
+    self.weixinPayIcon.image=[UIImage imageNamed:@"icon_pay_unchecked"];
+}
+//选择微信
+- (IBAction)chooseWeiXinPayBtnClicked:(UIButton *)sender {
+    
+    self.alipayIcon.image=[UIImage imageNamed:@"icon_pay_unchecked"];
+    self.weixinPayIcon.image=[UIImage imageNamed:@"icon_pay_checked"];
+}
+//支付按钮
+- (IBAction)payBtnClicked:(UIButton *)sender {
+    NSLog(@"pay");
+}
+
+@end

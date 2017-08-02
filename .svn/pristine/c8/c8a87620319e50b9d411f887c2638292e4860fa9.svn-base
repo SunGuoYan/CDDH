@@ -1,0 +1,1590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		32374D63A916C47CE0B78F00 /* libPods-ChargingStationHelperUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EE99C2D813692C985A9E56 /* libPods-ChargingStationHelperUITests.a */; };
+		6806A1641C880CFB00C4CD0E /* CSHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A1631C880CFB00C4CD0E /* CSHClient.m */; };
+		6806A1781C8826AE00C4CD0E /* CSHHTTPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A1731C8826AE00C4CD0E /* CSHHTTPError.m */; };
+		6806A1791C8826AE00C4CD0E /* CSHHTTPErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A1751C8826AE00C4CD0E /* CSHHTTPErrorMessage.m */; };
+		6806A17A1C8826AE00C4CD0E /* CSHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A1771C8826AE00C4CD0E /* CSHModel.m */; };
+		6806A17D1C88518600C4CD0E /* CSHNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A17C1C88518600C4CD0E /* CSHNetworkingManager.m */; };
+		6806A1861C89689B00C4CD0E /* CSHMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A1851C89689B00C4CD0E /* CSHMenuTableViewController.m */; };
+		6806A1891C89825000C4CD0E /* CSHChargingStationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A1881C89825000C4CD0E /* CSHChargingStationTableViewCell.m */; };
+		6806A18C1C89828600C4CD0E /* UIColor+CSH.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806A18B1C89828600C4CD0E /* UIColor+CSH.m */; };
+		682BE4601D37D889005BB772 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 682BE45F1D37D889005BB772 /* Menu.storyboard */; };
+		682BE4661D3D1333005BB772 /* CSHPreferenceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BE4651D3D1333005BB772 /* CSHPreferenceTableViewController.m */; };
+		682BE4691D3D136E005BB772 /* CSHFindChargerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BE4681D3D136E005BB772 /* CSHFindChargerTableViewController.m */; };
+		682BE46C1D3D199B005BB772 /* CSHCarBrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BE46B1D3D199B005BB772 /* CSHCarBrandListViewController.m */; };
+		682BE46F1D3D1CF1005BB772 /* CSHCarSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BE46E1D3D1CF1005BB772 /* CSHCarSeriesViewController.m */; };
+		682BE4751D3D1FFD005BB772 /* CSHCarBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BE4741D3D1FFD005BB772 /* CSHCarBrandTableViewCell.m */; };
+		682BE4781D3D200C005BB772 /* CSHCarSeriesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BE4771D3D200C005BB772 /* CSHCarSeriesTableViewCell.m */; };
+		6834DFDA1C86FF8700A4EBCE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834DFD91C86FF8700A4EBCE /* main.m */; };
+		6834DFDD1C86FF8700A4EBCE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834DFDC1C86FF8700A4EBCE /* AppDelegate.m */; };
+		6834DFE31C86FF8700A4EBCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6834DFE11C86FF8700A4EBCE /* Main.storyboard */; };
+		6834DFE51C86FF8700A4EBCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6834DFE41C86FF8700A4EBCE /* Assets.xcassets */; };
+		6834DFE81C86FF8700A4EBCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6834DFE61C86FF8700A4EBCE /* LaunchScreen.storyboard */; };
+		6834DFF31C86FF8700A4EBCE /* ChargingStationHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834DFF21C86FF8700A4EBCE /* ChargingStationHelperTests.m */; };
+		6834DFFE1C86FF8700A4EBCE /* ChargingStationHelperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834DFFD1C86FF8700A4EBCE /* ChargingStationHelperUITests.m */; };
+		6834E0111C87040600A4EBCE /* CSHChargingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834E0101C87040600A4EBCE /* CSHChargingViewController.m */; };
+		6834E0141C87041C00A4EBCE /* CSHTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834E0131C87041C00A4EBCE /* CSHTimelineViewController.m */; };
+		6834E0171C87043500A4EBCE /* CSHChargingStationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834E0161C87043500A4EBCE /* CSHChargingStationsViewController.m */; };
+		687CF6361D4A0C6700C3162E /* CSHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF6351D4A0C6700C3162E /* CSHSettingsViewController.m */; };
+		687CF6391D4A0C8D00C3162E /* CSHFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF6381D4A0C8D00C3162E /* CSHFeedbackViewController.m */; };
+		687CF63C1D4A0CAC00C3162E /* CSHAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF63B1D4A0CAC00C3162E /* CSHAboutUsViewController.m */; };
+		687CF63F1D4A118400C3162E /* CSHMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF63E1D4A118400C3162E /* CSHMessageCenterViewController.m */; };
+		687CF6421D4A119B00C3162E /* CSHMyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF6411D4A119B00C3162E /* CSHMyCollectionViewController.m */; };
+		687CF6451D4A11B700C3162E /* CSHChargingHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF6441D4A11B700C3162E /* CSHChargingHistoryViewController.m */; };
+		687CF6481D4A11C900C3162E /* CSHBookingHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF6471D4A11C900C3162E /* CSHBookingHistoryViewController.m */; };
+		687CF64B1D4A1C1600C3162E /* CSHRecommendationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687CF64A1D4A1C1600C3162E /* CSHRecommendationViewController.m */; };
+		688F61321D3E759200337300 /* CSHBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688F61311D3E759200337300 /* CSHBalanceViewController.m */; };
+		688F61351D3E75A100337300 /* CSHPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688F61341D3E75A100337300 /* CSHPaymentViewController.m */; };
+		688F61381D3FB5CB00337300 /* CSHDriverCertificatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688F61371D3FB5CB00337300 /* CSHDriverCertificatingViewController.m */; };
+		688F613B1D3FB70200337300 /* CSHProvinceSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688F613A1D3FB70200337300 /* CSHProvinceSelectionViewController.m */; };
+		688F61401D3FBC2800337300 /* CSHProvinceNameCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 688F613F1D3FBC2800337300 /* CSHProvinceNameCollectionViewCell.m */; };
+		688F61431D3FBECF00337300 /* UIStoryboard+CSH.m in Sources */ = {isa = PBXBuildFile; fileRef = 688F61421D3FBECF00337300 /* UIStoryboard+CSH.m */; };
+		68C53E781D20234600F760B3 /* NSUserDefaults+CSH.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C53E771D20234600F760B3 /* NSUserDefaults+CSH.m */; };
+		68C53E7B1D2026DC00F760B3 /* CSHKeywordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C53E7A1D2026DC00F760B3 /* CSHKeywordTableViewCell.m */; };
+		68D6EA2C1D0DA0CA00020D83 /* CSHDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D6EA2B1D0DA0CA00020D83 /* CSHDevice.m */; };
+		68DE37EA1CF858DE009D1474 /* CSHMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE37E91CF858DE009D1474 /* CSHMapViewController.m */; };
+		68DE37EC1CF89E2C009D1474 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DE37EB1CF89E2C009D1474 /* AVFoundation.framework */; };
+		68E21BA71D2A933700E17F4A /* CSHChargingStationDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BA61D2A933700E17F4A /* CSHChargingStationDetailTableViewCell.m */; };
+		68E21BAA1D2A94DC00E17F4A /* CSHChargingStationCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BA91D2A94DC00E17F4A /* CSHChargingStationCommentTableViewCell.m */; };
+		68E21BAD1D2A968F00E17F4A /* CSHChargingStationPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BAC1D2A968F00E17F4A /* CSHChargingStationPhotoCollectionViewCell.m */; };
+		68E21BB01D2AB02E00E17F4A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E21BAE1D2AB02E00E17F4A /* Login.storyboard */; };
+		68E21BB41D2AB09E00E17F4A /* CSHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BB31D2AB09E00E17F4A /* CSHLoginViewController.m */; };
+		68E21BB71D2AB0B000E17F4A /* CSHSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BB61D2AB0B000E17F4A /* CSHSignupViewController.m */; };
+		68E21BBA1D2ABDAF00E17F4A /* CSHResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BB91D2ABDAF00E17F4A /* CSHResetPasswordViewController.m */; };
+		68E21BBD1D2D4A5600E17F4A /* UIButton+CSHLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BBC1D2D4A5600E17F4A /* UIButton+CSHLogin.m */; };
+		68E21BC01D2D4CBE00E17F4A /* UIView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BBF1D2D4CBE00E17F4A /* UIView+CornerRadius.m */; };
+		68E21BC31D2D563300E17F4A /* CSHNewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BC21D2D563300E17F4A /* CSHNewPasswordViewController.m */; };
+		68E21BC61D2D575500E17F4A /* NSUserDefaults+UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BC51D2D575500E17F4A /* NSUserDefaults+UserConfig.m */; };
+		68E21BC91D2FDFC800E17F4A /* CSHAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BC81D2FDFC800E17F4A /* CSHAccount.m */; };
+		68E21BCC1D2FE7CA00E17F4A /* CSHNetworkingManager+API.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BCB1D2FE7CA00E17F4A /* CSHNetworkingManager+API.m */; };
+		68E21BCF1D2FF6D000E17F4A /* CSHLoginAndSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BCE1D2FF6D000E17F4A /* CSHLoginAndSignupViewController.m */; };
+		68E21BD21D2FFA0200E17F4A /* CSHCaptchaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BD11D2FFA0200E17F4A /* CSHCaptchaViewController.m */; };
+		68E21BD81D320B6400E17F4A /* CSHDeviceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BD71D320B6400E17F4A /* CSHDeviceAnnotation.m */; };
+		68E21BDB1D321D6B00E17F4A /* CSHDeviceAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21BDA1D321D6B00E17F4A /* CSHDeviceAnnotationView.m */; };
+		68FE6C4D1C96BFAF002C49C0 /* CSHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FE6C4C1C96BFAF002C49C0 /* CSHTabBarController.m */; };
+		68FE6C501C970648002C49C0 /* CSHChargingStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FE6C4F1C970648002C49C0 /* CSHChargingStationViewController.m */; };
+		68FE6C521C970BEF002C49C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FE6C511C970BEF002C49C0 /* MapKit.framework */; };
+		6C78963B1C65D208E83C76C5 /* libPods-ChargingStationHelper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B01826770F48A45D91E1B1E /* libPods-ChargingStationHelper.a */; };
+		A92273B80F1D9E9E3CD227A3 /* libPods-ChargingStationHelperTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83169CC6838F9E77EAB5DDF5 /* libPods-ChargingStationHelperTests.a */; };
+		CE6C30261D55B08D009E82AF /* UIViewController+KSGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C30251D55B08D009E82AF /* UIViewController+KSGuid.m */; };
+		F105F81C1D6BE11900C90AEB /* CSHPersonnelTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F105F81B1D6BE11900C90AEB /* CSHPersonnelTableVC.m */; };
+		F105F8291D6BFD6D00C90AEB /* KSDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F105F8261D6BFD6D00C90AEB /* KSDatePicker.m */; };
+		F105F82A1D6BFD6D00C90AEB /* KSDatePickerAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = F105F8281D6BFD6D00C90AEB /* KSDatePickerAppearance.m */; };
+		F10D20041D630A0C005E7F16 /* CSHStartStationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F10D20021D630A0C005E7F16 /* CSHStartStationVC.m */; };
+		F10D20051D630A0C005E7F16 /* CSHStartStationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F10D20031D630A0C005E7F16 /* CSHStartStationVC.xib */; };
+		F11A71E21D64B0D80067E9B4 /* chargingHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F11A71E01D64B0D80067E9B4 /* chargingHistoryCell.m */; };
+		F11A71E31D64B0D80067E9B4 /* chargingHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F11A71E11D64B0D80067E9B4 /* chargingHistoryCell.xib */; };
+		F122268E1D6850A10099111E /* personneInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F122268D1D6850A10099111E /* personneInfo.storyboard */; };
+		F14381D11D7D45C6003FDD0F /* CSHPayMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F14381D01D7D45C6003FDD0F /* CSHPayMoneyVC.m */; };
+		F16018981D65489E004CCF08 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = F16018941D65489E004CCF08 /* MBProgressHUD+MJ.m */; };
+		F16018991D65489E004CCF08 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F16018951D65489E004CCF08 /* MBProgressHUD.bundle */; };
+		F160189A1D65489E004CCF08 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F16018971D65489E004CCF08 /* MBProgressHUD.m */; };
+		F16018A61D65FE28004CCF08 /* CSHStartingStationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F16018A51D65FE28004CCF08 /* CSHStartingStationVC.m */; };
+		F16E83391D643BCD00E841FC /* collectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F16E83371D643BCD00E841FC /* collectionCell.m */; };
+		F16E833A1D643BCD00E841FC /* collectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F16E83381D643BCD00E841FC /* collectionCell.xib */; };
+		F189A5FA1D6C4E2C0049C5DC /* CSHChangePWDTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F189A5F91D6C4E2C0049C5DC /* CSHChangePWDTableVC.m */; };
+		F1CA95F31D59BD3F00E22BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1CA95F21D59BD3F00E22BCD /* Images.xcassets */; };
+		F1CFB1B91D7FAA9900CF572F /* CSHRechargeRecordTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CFB1B81D7FAA9900CF572F /* CSHRechargeRecordTableVC.m */; };
+		F1CFB1BD1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CFB1BB1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.m */; };
+		F1CFB1BE1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1CFB1BC1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.xib */; };
+		F1CFB1C31D7FB28100CF572F /* CSHRechargeRecordsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CFB1C21D7FB28100CF572F /* CSHRechargeRecordsVC.m */; };
+		F1CFB1C71D7FB80700CF572F /* RechargeRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CFB1C51D7FB80700CF572F /* RechargeRecordCell.m */; };
+		F1CFB1C81D7FB80700CF572F /* RechargeRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1CFB1C61D7FB80700CF572F /* RechargeRecordCell.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6834DFEF1C86FF8700A4EBCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6834DFCD1C86FF8600A4EBCE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6834DFD41C86FF8700A4EBCE;
+			remoteInfo = ChargingStationHelper;
+		};
+		6834DFFA1C86FF8700A4EBCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6834DFCD1C86FF8600A4EBCE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6834DFD41C86FF8700A4EBCE;
+			remoteInfo = ChargingStationHelper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0D3F9BA6C62A5AAB61A9C205 /* Pods-ChargingStationHelperUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargingStationHelperUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChargingStationHelperUITests/Pods-ChargingStationHelperUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3577A822659B6392ADA51BE1 /* Pods-ChargingStationHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargingStationHelper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChargingStationHelper/Pods-ChargingStationHelper.debug.xcconfig"; sourceTree = "<group>"; };
+		35EE99C2D813692C985A9E56 /* libPods-ChargingStationHelperUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChargingStationHelperUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3930151ADF3388BCE47EFB4A /* Pods-ChargingStationHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargingStationHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChargingStationHelper/Pods-ChargingStationHelper.release.xcconfig"; sourceTree = "<group>"; };
+		63A71A830B4A3EFC703D0883 /* Pods-ChargingStationHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargingStationHelperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChargingStationHelperTests/Pods-ChargingStationHelperTests.release.xcconfig"; sourceTree = "<group>"; };
+		6806A1621C880CFB00C4CD0E /* CSHClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHClient.h; path = Networking/CSHClient.h; sourceTree = "<group>"; };
+		6806A1631C880CFB00C4CD0E /* CSHClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHClient.m; path = Networking/CSHClient.m; sourceTree = "<group>"; };
+		6806A1721C8826AE00C4CD0E /* CSHHTTPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHHTTPError.h; path = Model/CSHHTTPError.h; sourceTree = "<group>"; };
+		6806A1731C8826AE00C4CD0E /* CSHHTTPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHHTTPError.m; path = Model/CSHHTTPError.m; sourceTree = "<group>"; };
+		6806A1741C8826AE00C4CD0E /* CSHHTTPErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHHTTPErrorMessage.h; path = Model/CSHHTTPErrorMessage.h; sourceTree = "<group>"; };
+		6806A1751C8826AE00C4CD0E /* CSHHTTPErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHHTTPErrorMessage.m; path = Model/CSHHTTPErrorMessage.m; sourceTree = "<group>"; };
+		6806A1761C8826AE00C4CD0E /* CSHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHModel.h; path = Model/CSHModel.h; sourceTree = "<group>"; };
+		6806A1771C8826AE00C4CD0E /* CSHModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHModel.m; path = Model/CSHModel.m; sourceTree = "<group>"; };
+		6806A17B1C88518600C4CD0E /* CSHNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHNetworkingManager.h; path = Networking/CSHNetworkingManager.h; sourceTree = "<group>"; };
+		6806A17C1C88518600C4CD0E /* CSHNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHNetworkingManager.m; path = Networking/CSHNetworkingManager.m; sourceTree = "<group>"; };
+		6806A1841C89689B00C4CD0E /* CSHMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHMenuTableViewController.h; path = Menu/CSHMenuTableViewController.h; sourceTree = "<group>"; };
+		6806A1851C89689B00C4CD0E /* CSHMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHMenuTableViewController.m; path = Menu/CSHMenuTableViewController.m; sourceTree = "<group>"; };
+		6806A1871C89825000C4CD0E /* CSHChargingStationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingStationTableViewCell.h; path = ChargingStations/CSHChargingStationTableViewCell.h; sourceTree = "<group>"; };
+		6806A1881C89825000C4CD0E /* CSHChargingStationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingStationTableViewCell.m; path = ChargingStations/CSHChargingStationTableViewCell.m; sourceTree = "<group>"; };
+		6806A18A1C89828600C4CD0E /* UIColor+CSH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CSH.h"; path = "Utils/UIColor+CSH.h"; sourceTree = "<group>"; };
+		6806A18B1C89828600C4CD0E /* UIColor+CSH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CSH.m"; path = "Utils/UIColor+CSH.m"; sourceTree = "<group>"; };
+		682BE45F1D37D889005BB772 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Menu.storyboard; path = Menu/Menu.storyboard; sourceTree = "<group>"; };
+		682BE4641D3D1333005BB772 /* CSHPreferenceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHPreferenceTableViewController.h; path = Menu/CSHPreferenceTableViewController.h; sourceTree = "<group>"; };
+		682BE4651D3D1333005BB772 /* CSHPreferenceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHPreferenceTableViewController.m; path = Menu/CSHPreferenceTableViewController.m; sourceTree = "<group>"; };
+		682BE4671D3D136E005BB772 /* CSHFindChargerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHFindChargerTableViewController.h; path = Menu/CSHFindChargerTableViewController.h; sourceTree = "<group>"; };
+		682BE4681D3D136E005BB772 /* CSHFindChargerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHFindChargerTableViewController.m; path = Menu/CSHFindChargerTableViewController.m; sourceTree = "<group>"; };
+		682BE46A1D3D199B005BB772 /* CSHCarBrandListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHCarBrandListViewController.h; path = Menu/CSHCarBrandListViewController.h; sourceTree = "<group>"; };
+		682BE46B1D3D199B005BB772 /* CSHCarBrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHCarBrandListViewController.m; path = Menu/CSHCarBrandListViewController.m; sourceTree = "<group>"; };
+		682BE46D1D3D1CF1005BB772 /* CSHCarSeriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHCarSeriesViewController.h; path = Menu/CSHCarSeriesViewController.h; sourceTree = "<group>"; };
+		682BE46E1D3D1CF1005BB772 /* CSHCarSeriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHCarSeriesViewController.m; path = Menu/CSHCarSeriesViewController.m; sourceTree = "<group>"; };
+		682BE4731D3D1FFD005BB772 /* CSHCarBrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHCarBrandTableViewCell.h; path = Menu/CSHCarBrandTableViewCell.h; sourceTree = "<group>"; };
+		682BE4741D3D1FFD005BB772 /* CSHCarBrandTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHCarBrandTableViewCell.m; path = Menu/CSHCarBrandTableViewCell.m; sourceTree = "<group>"; };
+		682BE4761D3D200C005BB772 /* CSHCarSeriesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHCarSeriesTableViewCell.h; path = Menu/CSHCarSeriesTableViewCell.h; sourceTree = "<group>"; };
+		682BE4771D3D200C005BB772 /* CSHCarSeriesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHCarSeriesTableViewCell.m; path = Menu/CSHCarSeriesTableViewCell.m; sourceTree = "<group>"; };
+		6834DFD51C86FF8700A4EBCE /* ChargingStationHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChargingStationHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6834DFD91C86FF8700A4EBCE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6834DFDB1C86FF8700A4EBCE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6834DFDC1C86FF8700A4EBCE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6834DFE21C86FF8700A4EBCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6834DFE41C86FF8700A4EBCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6834DFE71C86FF8700A4EBCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6834DFE91C86FF8700A4EBCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6834DFEE1C86FF8700A4EBCE /* ChargingStationHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChargingStationHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6834DFF21C86FF8700A4EBCE /* ChargingStationHelperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargingStationHelperTests.m; sourceTree = "<group>"; };
+		6834DFF41C86FF8700A4EBCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6834DFF91C86FF8700A4EBCE /* ChargingStationHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChargingStationHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6834DFFD1C86FF8700A4EBCE /* ChargingStationHelperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargingStationHelperUITests.m; sourceTree = "<group>"; };
+		6834DFFF1C86FF8700A4EBCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6834E00F1C87040600A4EBCE /* CSHChargingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingViewController.h; path = Charging/CSHChargingViewController.h; sourceTree = "<group>"; };
+		6834E0101C87040600A4EBCE /* CSHChargingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingViewController.m; path = Charging/CSHChargingViewController.m; sourceTree = "<group>"; };
+		6834E0121C87041C00A4EBCE /* CSHTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHTimelineViewController.h; path = Timeline/CSHTimelineViewController.h; sourceTree = "<group>"; };
+		6834E0131C87041C00A4EBCE /* CSHTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHTimelineViewController.m; path = Timeline/CSHTimelineViewController.m; sourceTree = "<group>"; };
+		6834E0151C87043500A4EBCE /* CSHChargingStationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingStationsViewController.h; path = ChargingStations/CSHChargingStationsViewController.h; sourceTree = "<group>"; };
+		6834E0161C87043500A4EBCE /* CSHChargingStationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingStationsViewController.m; path = ChargingStations/CSHChargingStationsViewController.m; sourceTree = "<group>"; };
+		687CF6341D4A0C6700C3162E /* CSHSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHSettingsViewController.h; path = Menu/CSHSettingsViewController.h; sourceTree = "<group>"; };
+		687CF6351D4A0C6700C3162E /* CSHSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHSettingsViewController.m; path = Menu/CSHSettingsViewController.m; sourceTree = "<group>"; };
+		687CF6371D4A0C8D00C3162E /* CSHFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHFeedbackViewController.h; path = Menu/CSHFeedbackViewController.h; sourceTree = "<group>"; };
+		687CF6381D4A0C8D00C3162E /* CSHFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHFeedbackViewController.m; path = Menu/CSHFeedbackViewController.m; sourceTree = "<group>"; };
+		687CF63A1D4A0CAC00C3162E /* CSHAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHAboutUsViewController.h; path = Menu/CSHAboutUsViewController.h; sourceTree = "<group>"; };
+		687CF63B1D4A0CAC00C3162E /* CSHAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHAboutUsViewController.m; path = Menu/CSHAboutUsViewController.m; sourceTree = "<group>"; };
+		687CF63D1D4A118400C3162E /* CSHMessageCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHMessageCenterViewController.h; path = Menu/CSHMessageCenterViewController.h; sourceTree = "<group>"; };
+		687CF63E1D4A118400C3162E /* CSHMessageCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHMessageCenterViewController.m; path = Menu/CSHMessageCenterViewController.m; sourceTree = "<group>"; };
+		687CF6401D4A119B00C3162E /* CSHMyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHMyCollectionViewController.h; path = Menu/CSHMyCollectionViewController.h; sourceTree = "<group>"; };
+		687CF6411D4A119B00C3162E /* CSHMyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHMyCollectionViewController.m; path = Menu/CSHMyCollectionViewController.m; sourceTree = "<group>"; };
+		687CF6431D4A11B700C3162E /* CSHChargingHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingHistoryViewController.h; path = Menu/CSHChargingHistoryViewController.h; sourceTree = "<group>"; };
+		687CF6441D4A11B700C3162E /* CSHChargingHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingHistoryViewController.m; path = Menu/CSHChargingHistoryViewController.m; sourceTree = "<group>"; };
+		687CF6461D4A11C900C3162E /* CSHBookingHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHBookingHistoryViewController.h; path = Menu/CSHBookingHistoryViewController.h; sourceTree = "<group>"; };
+		687CF6471D4A11C900C3162E /* CSHBookingHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHBookingHistoryViewController.m; path = Menu/CSHBookingHistoryViewController.m; sourceTree = "<group>"; };
+		687CF6491D4A1C1600C3162E /* CSHRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHRecommendationViewController.h; path = Menu/CSHRecommendationViewController.h; sourceTree = "<group>"; };
+		687CF64A1D4A1C1600C3162E /* CSHRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHRecommendationViewController.m; path = Menu/CSHRecommendationViewController.m; sourceTree = "<group>"; };
+		688F61301D3E759200337300 /* CSHBalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHBalanceViewController.h; path = Menu/CSHBalanceViewController.h; sourceTree = "<group>"; };
+		688F61311D3E759200337300 /* CSHBalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHBalanceViewController.m; path = Menu/CSHBalanceViewController.m; sourceTree = "<group>"; };
+		688F61331D3E75A100337300 /* CSHPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHPaymentViewController.h; path = Menu/CSHPaymentViewController.h; sourceTree = "<group>"; };
+		688F61341D3E75A100337300 /* CSHPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHPaymentViewController.m; path = Menu/CSHPaymentViewController.m; sourceTree = "<group>"; };
+		688F61361D3FB5CB00337300 /* CSHDriverCertificatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHDriverCertificatingViewController.h; path = Menu/CSHDriverCertificatingViewController.h; sourceTree = "<group>"; };
+		688F61371D3FB5CB00337300 /* CSHDriverCertificatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHDriverCertificatingViewController.m; path = Menu/CSHDriverCertificatingViewController.m; sourceTree = "<group>"; };
+		688F61391D3FB70200337300 /* CSHProvinceSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHProvinceSelectionViewController.h; path = Menu/CSHProvinceSelectionViewController.h; sourceTree = "<group>"; };
+		688F613A1D3FB70200337300 /* CSHProvinceSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHProvinceSelectionViewController.m; path = Menu/CSHProvinceSelectionViewController.m; sourceTree = "<group>"; };
+		688F613C1D3FB91E00337300 /* CSHUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CSHUtils.h; path = Utils/CSHUtils.h; sourceTree = "<group>"; };
+		688F613D1D3FB98000337300 /* CSHPrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSHPrefix.pch; sourceTree = "<group>"; };
+		688F613E1D3FBC2800337300 /* CSHProvinceNameCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHProvinceNameCollectionViewCell.h; path = Menu/CSHProvinceNameCollectionViewCell.h; sourceTree = "<group>"; };
+		688F613F1D3FBC2800337300 /* CSHProvinceNameCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHProvinceNameCollectionViewCell.m; path = Menu/CSHProvinceNameCollectionViewCell.m; sourceTree = "<group>"; };
+		688F61411D3FBECF00337300 /* UIStoryboard+CSH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIStoryboard+CSH.h"; path = "Utils/UIStoryboard+CSH.h"; sourceTree = "<group>"; };
+		688F61421D3FBECF00337300 /* UIStoryboard+CSH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIStoryboard+CSH.m"; path = "Utils/UIStoryboard+CSH.m"; sourceTree = "<group>"; };
+		68C53E761D20234600F760B3 /* NSUserDefaults+CSH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+CSH.h"; path = "Model/NSUserDefaults+CSH.h"; sourceTree = "<group>"; };
+		68C53E771D20234600F760B3 /* NSUserDefaults+CSH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+CSH.m"; path = "Model/NSUserDefaults+CSH.m"; sourceTree = "<group>"; };
+		68C53E791D2026DC00F760B3 /* CSHKeywordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHKeywordTableViewCell.h; path = ChargingStations/CSHKeywordTableViewCell.h; sourceTree = "<group>"; };
+		68C53E7A1D2026DC00F760B3 /* CSHKeywordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHKeywordTableViewCell.m; path = ChargingStations/CSHKeywordTableViewCell.m; sourceTree = "<group>"; };
+		68D6EA2A1D0DA0CA00020D83 /* CSHDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHDevice.h; path = Model/CSHDevice.h; sourceTree = "<group>"; };
+		68D6EA2B1D0DA0CA00020D83 /* CSHDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHDevice.m; path = Model/CSHDevice.m; sourceTree = "<group>"; };
+		68DE37E81CF858DE009D1474 /* CSHMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHMapViewController.h; path = ChargingStations/CSHMapViewController.h; sourceTree = "<group>"; };
+		68DE37E91CF858DE009D1474 /* CSHMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHMapViewController.m; path = ChargingStations/CSHMapViewController.m; sourceTree = "<group>"; };
+		68DE37EB1CF89E2C009D1474 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		68E21BA51D2A933700E17F4A /* CSHChargingStationDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingStationDetailTableViewCell.h; path = ChargingStations/CSHChargingStationDetailTableViewCell.h; sourceTree = "<group>"; };
+		68E21BA61D2A933700E17F4A /* CSHChargingStationDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingStationDetailTableViewCell.m; path = ChargingStations/CSHChargingStationDetailTableViewCell.m; sourceTree = "<group>"; };
+		68E21BA81D2A94DC00E17F4A /* CSHChargingStationCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingStationCommentTableViewCell.h; path = ChargingStations/CSHChargingStationCommentTableViewCell.h; sourceTree = "<group>"; };
+		68E21BA91D2A94DC00E17F4A /* CSHChargingStationCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingStationCommentTableViewCell.m; path = ChargingStations/CSHChargingStationCommentTableViewCell.m; sourceTree = "<group>"; };
+		68E21BAB1D2A968F00E17F4A /* CSHChargingStationPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingStationPhotoCollectionViewCell.h; path = ChargingStations/CSHChargingStationPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		68E21BAC1D2A968F00E17F4A /* CSHChargingStationPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingStationPhotoCollectionViewCell.m; path = ChargingStations/CSHChargingStationPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		68E21BAF1D2AB02E00E17F4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		68E21BB21D2AB09E00E17F4A /* CSHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHLoginViewController.h; path = Login/CSHLoginViewController.h; sourceTree = "<group>"; };
+		68E21BB31D2AB09E00E17F4A /* CSHLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHLoginViewController.m; path = Login/CSHLoginViewController.m; sourceTree = "<group>"; };
+		68E21BB51D2AB0B000E17F4A /* CSHSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHSignupViewController.h; path = Login/CSHSignupViewController.h; sourceTree = "<group>"; };
+		68E21BB61D2AB0B000E17F4A /* CSHSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHSignupViewController.m; path = Login/CSHSignupViewController.m; sourceTree = "<group>"; };
+		68E21BB81D2ABDAF00E17F4A /* CSHResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHResetPasswordViewController.h; path = Login/CSHResetPasswordViewController.h; sourceTree = "<group>"; };
+		68E21BB91D2ABDAF00E17F4A /* CSHResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHResetPasswordViewController.m; path = Login/CSHResetPasswordViewController.m; sourceTree = "<group>"; };
+		68E21BBB1D2D4A5600E17F4A /* UIButton+CSHLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+CSHLogin.h"; path = "Login/UIButton+CSHLogin.h"; sourceTree = "<group>"; };
+		68E21BBC1D2D4A5600E17F4A /* UIButton+CSHLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+CSHLogin.m"; path = "Login/UIButton+CSHLogin.m"; sourceTree = "<group>"; };
+		68E21BBE1D2D4CBE00E17F4A /* UIView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CornerRadius.h"; path = "Utils/UIView+CornerRadius.h"; sourceTree = "<group>"; };
+		68E21BBF1D2D4CBE00E17F4A /* UIView+CornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CornerRadius.m"; path = "Utils/UIView+CornerRadius.m"; sourceTree = "<group>"; };
+		68E21BC11D2D563300E17F4A /* CSHNewPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHNewPasswordViewController.h; path = Login/CSHNewPasswordViewController.h; sourceTree = "<group>"; };
+		68E21BC21D2D563300E17F4A /* CSHNewPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHNewPasswordViewController.m; path = Login/CSHNewPasswordViewController.m; sourceTree = "<group>"; };
+		68E21BC41D2D575500E17F4A /* NSUserDefaults+UserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+UserConfig.h"; path = "Utils/NSUserDefaults+UserConfig.h"; sourceTree = "<group>"; };
+		68E21BC51D2D575500E17F4A /* NSUserDefaults+UserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+UserConfig.m"; path = "Utils/NSUserDefaults+UserConfig.m"; sourceTree = "<group>"; };
+		68E21BC71D2FDFC800E17F4A /* CSHAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHAccount.h; path = Model/CSHAccount.h; sourceTree = "<group>"; };
+		68E21BC81D2FDFC800E17F4A /* CSHAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHAccount.m; path = Model/CSHAccount.m; sourceTree = "<group>"; };
+		68E21BCA1D2FE7CA00E17F4A /* CSHNetworkingManager+API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CSHNetworkingManager+API.h"; path = "Networking/CSHNetworkingManager+API.h"; sourceTree = "<group>"; };
+		68E21BCB1D2FE7CA00E17F4A /* CSHNetworkingManager+API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CSHNetworkingManager+API.m"; path = "Networking/CSHNetworkingManager+API.m"; sourceTree = "<group>"; };
+		68E21BCD1D2FF6D000E17F4A /* CSHLoginAndSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHLoginAndSignupViewController.h; path = Login/CSHLoginAndSignupViewController.h; sourceTree = "<group>"; };
+		68E21BCE1D2FF6D000E17F4A /* CSHLoginAndSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHLoginAndSignupViewController.m; path = Login/CSHLoginAndSignupViewController.m; sourceTree = "<group>"; };
+		68E21BD01D2FFA0200E17F4A /* CSHCaptchaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHCaptchaViewController.h; path = Login/CSHCaptchaViewController.h; sourceTree = "<group>"; };
+		68E21BD11D2FFA0200E17F4A /* CSHCaptchaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHCaptchaViewController.m; path = Login/CSHCaptchaViewController.m; sourceTree = "<group>"; };
+		68E21BD61D320B6400E17F4A /* CSHDeviceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHDeviceAnnotation.h; path = ChargingStations/CSHDeviceAnnotation.h; sourceTree = "<group>"; };
+		68E21BD71D320B6400E17F4A /* CSHDeviceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHDeviceAnnotation.m; path = ChargingStations/CSHDeviceAnnotation.m; sourceTree = "<group>"; };
+		68E21BD91D321D6B00E17F4A /* CSHDeviceAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHDeviceAnnotationView.h; path = ChargingStations/CSHDeviceAnnotationView.h; sourceTree = "<group>"; };
+		68E21BDA1D321D6B00E17F4A /* CSHDeviceAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHDeviceAnnotationView.m; path = ChargingStations/CSHDeviceAnnotationView.m; sourceTree = "<group>"; };
+		68FE6C4B1C96BFAF002C49C0 /* CSHTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHTabBarController.h; sourceTree = "<group>"; };
+		68FE6C4C1C96BFAF002C49C0 /* CSHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHTabBarController.m; sourceTree = "<group>"; };
+		68FE6C4E1C970648002C49C0 /* CSHChargingStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSHChargingStationViewController.h; path = ChargingStations/CSHChargingStationViewController.h; sourceTree = "<group>"; };
+		68FE6C4F1C970648002C49C0 /* CSHChargingStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSHChargingStationViewController.m; path = ChargingStations/CSHChargingStationViewController.m; sourceTree = "<group>"; };
+		68FE6C511C970BEF002C49C0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		83169CC6838F9E77EAB5DDF5 /* libPods-ChargingStationHelperTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChargingStationHelperTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B01826770F48A45D91E1B1E /* libPods-ChargingStationHelper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChargingStationHelper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C070D3FCC0B53C0A05880EB5 /* Pods-ChargingStationHelperUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargingStationHelperUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChargingStationHelperUITests/Pods-ChargingStationHelperUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CE6C30241D55B08D009E82AF /* UIViewController+KSGuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KSGuid.h"; sourceTree = "<group>"; };
+		CE6C30251D55B08D009E82AF /* UIViewController+KSGuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KSGuid.m"; sourceTree = "<group>"; };
+		E6EEA8FC48DD351A707DBE1A /* Pods-ChargingStationHelperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargingStationHelperTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChargingStationHelperTests/Pods-ChargingStationHelperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F105F81A1D6BE11900C90AEB /* CSHPersonnelTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHPersonnelTableVC.h; sourceTree = "<group>"; };
+		F105F81B1D6BE11900C90AEB /* CSHPersonnelTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHPersonnelTableVC.m; sourceTree = "<group>"; };
+		F105F8251D6BFD6D00C90AEB /* KSDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDatePicker.h; sourceTree = "<group>"; };
+		F105F8261D6BFD6D00C90AEB /* KSDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDatePicker.m; sourceTree = "<group>"; };
+		F105F8271D6BFD6D00C90AEB /* KSDatePickerAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSDatePickerAppearance.h; sourceTree = "<group>"; };
+		F105F8281D6BFD6D00C90AEB /* KSDatePickerAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSDatePickerAppearance.m; sourceTree = "<group>"; };
+		F10D20011D630A0C005E7F16 /* CSHStartStationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHStartStationVC.h; sourceTree = "<group>"; };
+		F10D20021D630A0C005E7F16 /* CSHStartStationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHStartStationVC.m; sourceTree = "<group>"; };
+		F10D20031D630A0C005E7F16 /* CSHStartStationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSHStartStationVC.xib; sourceTree = "<group>"; };
+		F11A71DF1D64B0D80067E9B4 /* chargingHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chargingHistoryCell.h; sourceTree = "<group>"; };
+		F11A71E01D64B0D80067E9B4 /* chargingHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chargingHistoryCell.m; sourceTree = "<group>"; };
+		F11A71E11D64B0D80067E9B4 /* chargingHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chargingHistoryCell.xib; sourceTree = "<group>"; };
+		F122268D1D6850A10099111E /* personneInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = personneInfo.storyboard; sourceTree = "<group>"; };
+		F14381CF1D7D45C6003FDD0F /* CSHPayMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHPayMoneyVC.h; sourceTree = "<group>"; };
+		F14381D01D7D45C6003FDD0F /* CSHPayMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHPayMoneyVC.m; sourceTree = "<group>"; };
+		F16018931D65489E004CCF08 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		F16018941D65489E004CCF08 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		F16018951D65489E004CCF08 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		F16018961D65489E004CCF08 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		F16018971D65489E004CCF08 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		F16018A41D65FE28004CCF08 /* CSHStartingStationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHStartingStationVC.h; sourceTree = "<group>"; };
+		F16018A51D65FE28004CCF08 /* CSHStartingStationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHStartingStationVC.m; sourceTree = "<group>"; };
+		F16E83361D643BCD00E841FC /* collectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collectionCell.h; sourceTree = "<group>"; };
+		F16E83371D643BCD00E841FC /* collectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = collectionCell.m; sourceTree = "<group>"; };
+		F16E83381D643BCD00E841FC /* collectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = collectionCell.xib; sourceTree = "<group>"; };
+		F189A5F81D6C4E2C0049C5DC /* CSHChangePWDTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHChangePWDTableVC.h; sourceTree = "<group>"; };
+		F189A5F91D6C4E2C0049C5DC /* CSHChangePWDTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHChangePWDTableVC.m; sourceTree = "<group>"; };
+		F1CA95F21D59BD3F00E22BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1CFB1B71D7FAA9900CF572F /* CSHRechargeRecordTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHRechargeRecordTableVC.h; sourceTree = "<group>"; };
+		F1CFB1B81D7FAA9900CF572F /* CSHRechargeRecordTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHRechargeRecordTableVC.m; sourceTree = "<group>"; };
+		F1CFB1BA1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHRechargeRecordTableCell.h; sourceTree = "<group>"; };
+		F1CFB1BB1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHRechargeRecordTableCell.m; sourceTree = "<group>"; };
+		F1CFB1BC1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSHRechargeRecordTableCell.xib; sourceTree = "<group>"; };
+		F1CFB1C11D7FB28100CF572F /* CSHRechargeRecordsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHRechargeRecordsVC.h; sourceTree = "<group>"; };
+		F1CFB1C21D7FB28100CF572F /* CSHRechargeRecordsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHRechargeRecordsVC.m; sourceTree = "<group>"; };
+		F1CFB1C41D7FB80700CF572F /* RechargeRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeRecordCell.h; sourceTree = "<group>"; };
+		F1CFB1C51D7FB80700CF572F /* RechargeRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeRecordCell.m; sourceTree = "<group>"; };
+		F1CFB1C61D7FB80700CF572F /* RechargeRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeRecordCell.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6834DFD21C86FF8700A4EBCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68DE37EC1CF89E2C009D1474 /* AVFoundation.framework in Frameworks */,
+				68FE6C521C970BEF002C49C0 /* MapKit.framework in Frameworks */,
+				6C78963B1C65D208E83C76C5 /* libPods-ChargingStationHelper.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6834DFEB1C86FF8700A4EBCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A92273B80F1D9E9E3CD227A3 /* libPods-ChargingStationHelperTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6834DFF61C86FF8700A4EBCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32374D63A916C47CE0B78F00 /* libPods-ChargingStationHelperUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6806A15E1C880C8800C4CD0E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6806A1621C880CFB00C4CD0E /* CSHClient.h */,
+				6806A1631C880CFB00C4CD0E /* CSHClient.m */,
+				6806A17B1C88518600C4CD0E /* CSHNetworkingManager.h */,
+				6806A17C1C88518600C4CD0E /* CSHNetworkingManager.m */,
+				68E21BCA1D2FE7CA00E17F4A /* CSHNetworkingManager+API.h */,
+				68E21BCB1D2FE7CA00E17F4A /* CSHNetworkingManager+API.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		6806A1681C880F7700C4CD0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6806A1721C8826AE00C4CD0E /* CSHHTTPError.h */,
+				6806A1731C8826AE00C4CD0E /* CSHHTTPError.m */,
+				6806A1741C8826AE00C4CD0E /* CSHHTTPErrorMessage.h */,
+				6806A1751C8826AE00C4CD0E /* CSHHTTPErrorMessage.m */,
+				6806A1761C8826AE00C4CD0E /* CSHModel.h */,
+				6806A1771C8826AE00C4CD0E /* CSHModel.m */,
+				68D6EA2A1D0DA0CA00020D83 /* CSHDevice.h */,
+				68D6EA2B1D0DA0CA00020D83 /* CSHDevice.m */,
+				68E21BC71D2FDFC800E17F4A /* CSHAccount.h */,
+				68E21BC81D2FDFC800E17F4A /* CSHAccount.m */,
+				68C53E761D20234600F760B3 /* NSUserDefaults+CSH.h */,
+				68C53E771D20234600F760B3 /* NSUserDefaults+CSH.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6806A18D1C89828A00C4CD0E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				688F613C1D3FB91E00337300 /* CSHUtils.h */,
+				6806A18A1C89828600C4CD0E /* UIColor+CSH.h */,
+				6806A18B1C89828600C4CD0E /* UIColor+CSH.m */,
+				68E21BBE1D2D4CBE00E17F4A /* UIView+CornerRadius.h */,
+				68E21BBF1D2D4CBE00E17F4A /* UIView+CornerRadius.m */,
+				68E21BC41D2D575500E17F4A /* NSUserDefaults+UserConfig.h */,
+				68E21BC51D2D575500E17F4A /* NSUserDefaults+UserConfig.m */,
+				688F61411D3FBECF00337300 /* UIStoryboard+CSH.h */,
+				688F61421D3FBECF00337300 /* UIStoryboard+CSH.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		6834DFCC1C86FF8600A4EBCE = {
+			isa = PBXGroup;
+			children = (
+				F105F8241D6BFD6D00C90AEB /* KSDatePicker */,
+				F16018921D65489E004CCF08 /* MBProgressHUD */,
+				6834DFD71C86FF8700A4EBCE /* ChargingStationHelper */,
+				6834DFF11C86FF8700A4EBCE /* ChargingStationHelperTests */,
+				6834DFFC1C86FF8700A4EBCE /* ChargingStationHelperUITests */,
+				6834DFD61C86FF8700A4EBCE /* Products */,
+				DC532763BE54BEA32C16C333 /* Frameworks */,
+				D29369C8C841516A0F4B0088 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		6834DFD61C86FF8700A4EBCE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6834DFD51C86FF8700A4EBCE /* ChargingStationHelper.app */,
+				6834DFEE1C86FF8700A4EBCE /* ChargingStationHelperTests.xctest */,
+				6834DFF91C86FF8700A4EBCE /* ChargingStationHelperUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6834DFD71C86FF8700A4EBCE /* ChargingStationHelper */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C30241D55B08D009E82AF /* UIViewController+KSGuid.h */,
+				CE6C30251D55B08D009E82AF /* UIViewController+KSGuid.m */,
+				6806A18D1C89828A00C4CD0E /* Utils */,
+				6806A1681C880F7700C4CD0E /* Model */,
+				6806A15E1C880C8800C4CD0E /* Networking */,
+				F10C51571D52DBBE00CEAB41 /* FourVC */,
+				6834DFDB1C86FF8700A4EBCE /* AppDelegate.h */,
+				6834DFDC1C86FF8700A4EBCE /* AppDelegate.m */,
+				68FE6C4B1C96BFAF002C49C0 /* CSHTabBarController.h */,
+				68FE6C4C1C96BFAF002C49C0 /* CSHTabBarController.m */,
+				682BE45F1D37D889005BB772 /* Menu.storyboard */,
+				68E21BAE1D2AB02E00E17F4A /* Login.storyboard */,
+				F122268D1D6850A10099111E /* personneInfo.storyboard */,
+				6834DFE11C86FF8700A4EBCE /* Main.storyboard */,
+				6834DFE41C86FF8700A4EBCE /* Assets.xcassets */,
+				F1CA95F21D59BD3F00E22BCD /* Images.xcassets */,
+				6834DFD81C86FF8700A4EBCE /* Supporting Files */,
+			);
+			path = ChargingStationHelper;
+			sourceTree = "<group>";
+		};
+		6834DFD81C86FF8700A4EBCE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6834DFE61C86FF8700A4EBCE /* LaunchScreen.storyboard */,
+				6834DFE91C86FF8700A4EBCE /* Info.plist */,
+				6834DFD91C86FF8700A4EBCE /* main.m */,
+				688F613D1D3FB98000337300 /* CSHPrefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6834DFF11C86FF8700A4EBCE /* ChargingStationHelperTests */ = {
+			isa = PBXGroup;
+			children = (
+				6834DFF21C86FF8700A4EBCE /* ChargingStationHelperTests.m */,
+				6834DFF41C86FF8700A4EBCE /* Info.plist */,
+			);
+			path = ChargingStationHelperTests;
+			sourceTree = "<group>";
+		};
+		6834DFFC1C86FF8700A4EBCE /* ChargingStationHelperUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6834DFFD1C86FF8700A4EBCE /* ChargingStationHelperUITests.m */,
+				6834DFFF1C86FF8700A4EBCE /* Info.plist */,
+			);
+			path = ChargingStationHelperUITests;
+			sourceTree = "<group>";
+		};
+		6834E00B1C8702AF00A4EBCE /* Charging Stations */ = {
+			isa = PBXGroup;
+			children = (
+				68E21BD41D320A9400E17F4A /* Map */,
+				68E21BD51D320AA900E17F4A /* List */,
+				68E21BD31D320A6500E17F4A /* Detail */,
+			);
+			name = "Charging Stations";
+			sourceTree = "<group>";
+		};
+		6834E00C1C8702F000A4EBCE /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				6834E0121C87041C00A4EBCE /* CSHTimelineViewController.h */,
+				6834E0131C87041C00A4EBCE /* CSHTimelineViewController.m */,
+			);
+			name = Timeline;
+			sourceTree = "<group>";
+		};
+		6834E00E1C87030800A4EBCE /* Charging */ = {
+			isa = PBXGroup;
+			children = (
+				F10D1FF11D6301E7005E7F16 /* ScanView */,
+				F10D1FF21D630204005E7F16 /* StartStation */,
+			);
+			name = Charging;
+			sourceTree = "<group>";
+		};
+		6834E0191C8705F800A4EBCE /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				F122268F1D68531C0099111E /* personnelInfoVC */,
+				F10C516B1D54275800CEAB41 /* SettingsBtn */,
+				F10C51631D5310C800CEAB41 /* MenuTable */,
+				68E21BB11D2AB05C00E17F4A /* Login */,
+				F10C516F1D542F9E00CEAB41 /* FourBtn */,
+				F10C515C1D52EBF900CEAB41 /* MyMoney */,
+				F10C51641D54208700CEAB41 /* DriverCertificate */,
+				F10C51681D5421D800CEAB41 /* FoundStation */,
+				F10C51671D5421A100CEAB41 /* Recommendation */,
+				F10C515D1D52EC0C00CEAB41 /* PreferSettings */,
+				F10C51661D54215B00CEAB41 /* Guidelines */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		68E21BB11D2AB05C00E17F4A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F16C34FE1D5B31D700D23142 /* LoginVC */,
+				F16C34FF1D5B325A00D23142 /* RegisterVC */,
+				F16C35011D5C0E7F00D23142 /* Reset-New-PSD-VC */,
+				F16C35001D5C0DE200D23142 /* Login-CaptchaVC-？？？ */,
+				68E21BBB1D2D4A5600E17F4A /* UIButton+CSHLogin.h */,
+				68E21BBC1D2D4A5600E17F4A /* UIButton+CSHLogin.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		68E21BD31D320A6500E17F4A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				68FE6C4E1C970648002C49C0 /* CSHChargingStationViewController.h */,
+				68FE6C4F1C970648002C49C0 /* CSHChargingStationViewController.m */,
+				68E21BA51D2A933700E17F4A /* CSHChargingStationDetailTableViewCell.h */,
+				68E21BA61D2A933700E17F4A /* CSHChargingStationDetailTableViewCell.m */,
+				68E21BA81D2A94DC00E17F4A /* CSHChargingStationCommentTableViewCell.h */,
+				68E21BA91D2A94DC00E17F4A /* CSHChargingStationCommentTableViewCell.m */,
+				68E21BAB1D2A968F00E17F4A /* CSHChargingStationPhotoCollectionViewCell.h */,
+				68E21BAC1D2A968F00E17F4A /* CSHChargingStationPhotoCollectionViewCell.m */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		68E21BD41D320A9400E17F4A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				68DE37E81CF858DE009D1474 /* CSHMapViewController.h */,
+				68DE37E91CF858DE009D1474 /* CSHMapViewController.m */,
+				68E21BD61D320B6400E17F4A /* CSHDeviceAnnotation.h */,
+				68E21BD71D320B6400E17F4A /* CSHDeviceAnnotation.m */,
+				68E21BD91D321D6B00E17F4A /* CSHDeviceAnnotationView.h */,
+				68E21BDA1D321D6B00E17F4A /* CSHDeviceAnnotationView.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		68E21BD51D320AA900E17F4A /* List */ = {
+			isa = PBXGroup;
+			children = (
+				6834E0151C87043500A4EBCE /* CSHChargingStationsViewController.h */,
+				6834E0161C87043500A4EBCE /* CSHChargingStationsViewController.m */,
+				6806A1871C89825000C4CD0E /* CSHChargingStationTableViewCell.h */,
+				6806A1881C89825000C4CD0E /* CSHChargingStationTableViewCell.m */,
+				68C53E791D2026DC00F760B3 /* CSHKeywordTableViewCell.h */,
+				68C53E7A1D2026DC00F760B3 /* CSHKeywordTableViewCell.m */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		D29369C8C841516A0F4B0088 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3577A822659B6392ADA51BE1 /* Pods-ChargingStationHelper.debug.xcconfig */,
+				3930151ADF3388BCE47EFB4A /* Pods-ChargingStationHelper.release.xcconfig */,
+				E6EEA8FC48DD351A707DBE1A /* Pods-ChargingStationHelperTests.debug.xcconfig */,
+				63A71A830B4A3EFC703D0883 /* Pods-ChargingStationHelperTests.release.xcconfig */,
+				0D3F9BA6C62A5AAB61A9C205 /* Pods-ChargingStationHelperUITests.debug.xcconfig */,
+				C070D3FCC0B53C0A05880EB5 /* Pods-ChargingStationHelperUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DC532763BE54BEA32C16C333 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68DE37EB1CF89E2C009D1474 /* AVFoundation.framework */,
+				68FE6C511C970BEF002C49C0 /* MapKit.framework */,
+				8B01826770F48A45D91E1B1E /* libPods-ChargingStationHelper.a */,
+				83169CC6838F9E77EAB5DDF5 /* libPods-ChargingStationHelperTests.a */,
+				35EE99C2D813692C985A9E56 /* libPods-ChargingStationHelperUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F105F8241D6BFD6D00C90AEB /* KSDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				F105F8251D6BFD6D00C90AEB /* KSDatePicker.h */,
+				F105F8261D6BFD6D00C90AEB /* KSDatePicker.m */,
+				F105F8271D6BFD6D00C90AEB /* KSDatePickerAppearance.h */,
+				F105F8281D6BFD6D00C90AEB /* KSDatePickerAppearance.m */,
+			);
+			path = KSDatePicker;
+			sourceTree = "<group>";
+		};
+		F10C51571D52DBBE00CEAB41 /* FourVC */ = {
+			isa = PBXGroup;
+			children = (
+				F10C515B1D52DBDF00CEAB41 /* 1-Around */,
+				F10C515A1D52DBDB00CEAB41 /* 2-Charging */,
+				F10C51591D52DBD700CEAB41 /* 3-Found */,
+				F10C51581D52DBD000CEAB41 /* 4-Mine */,
+			);
+			name = FourVC;
+			sourceTree = "<group>";
+		};
+		F10C51581D52DBD000CEAB41 /* 4-Mine */ = {
+			isa = PBXGroup;
+			children = (
+				6834E0191C8705F800A4EBCE /* Menu */,
+			);
+			name = "4-Mine";
+			sourceTree = "<group>";
+		};
+		F10C51591D52DBD700CEAB41 /* 3-Found */ = {
+			isa = PBXGroup;
+			children = (
+				6834E00C1C8702F000A4EBCE /* Timeline */,
+			);
+			name = "3-Found";
+			sourceTree = "<group>";
+		};
+		F10C515A1D52DBDB00CEAB41 /* 2-Charging */ = {
+			isa = PBXGroup;
+			children = (
+				6834E00E1C87030800A4EBCE /* Charging */,
+			);
+			name = "2-Charging";
+			sourceTree = "<group>";
+		};
+		F10C515B1D52DBDF00CEAB41 /* 1-Around */ = {
+			isa = PBXGroup;
+			children = (
+				6834E00B1C8702AF00A4EBCE /* Charging Stations */,
+			);
+			name = "1-Around";
+			sourceTree = "<group>";
+		};
+		F10C515C1D52EBF900CEAB41 /* MyMoney */ = {
+			isa = PBXGroup;
+			children = (
+				F1CFB1C01D7FB23800CF572F /* RechargeRecordVC */,
+				F1CFB1BF1D7FB21300CF572F /* RechargeRecordTable */,
+				688F61301D3E759200337300 /* CSHBalanceViewController.h */,
+				688F61311D3E759200337300 /* CSHBalanceViewController.m */,
+				F14381CF1D7D45C6003FDD0F /* CSHPayMoneyVC.h */,
+				F14381D01D7D45C6003FDD0F /* CSHPayMoneyVC.m */,
+				688F61331D3E75A100337300 /* CSHPaymentViewController.h */,
+				688F61341D3E75A100337300 /* CSHPaymentViewController.m */,
+			);
+			name = MyMoney;
+			sourceTree = "<group>";
+		};
+		F10C515D1D52EC0C00CEAB41 /* PreferSettings */ = {
+			isa = PBXGroup;
+			children = (
+				F10C51621D53109500CEAB41 /* PreferTable */,
+				F10C51611D53104100CEAB41 /* Brand */,
+				F10C51601D53103600CEAB41 /* Series */,
+			);
+			name = PreferSettings;
+			sourceTree = "<group>";
+		};
+		F10C51601D53103600CEAB41 /* Series */ = {
+			isa = PBXGroup;
+			children = (
+				682BE4761D3D200C005BB772 /* CSHCarSeriesTableViewCell.h */,
+				682BE4771D3D200C005BB772 /* CSHCarSeriesTableViewCell.m */,
+				682BE46D1D3D1CF1005BB772 /* CSHCarSeriesViewController.h */,
+				682BE46E1D3D1CF1005BB772 /* CSHCarSeriesViewController.m */,
+			);
+			name = Series;
+			sourceTree = "<group>";
+		};
+		F10C51611D53104100CEAB41 /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				682BE46A1D3D199B005BB772 /* CSHCarBrandListViewController.h */,
+				682BE46B1D3D199B005BB772 /* CSHCarBrandListViewController.m */,
+				682BE4731D3D1FFD005BB772 /* CSHCarBrandTableViewCell.h */,
+				682BE4741D3D1FFD005BB772 /* CSHCarBrandTableViewCell.m */,
+			);
+			name = Brand;
+			sourceTree = "<group>";
+		};
+		F10C51621D53109500CEAB41 /* PreferTable */ = {
+			isa = PBXGroup;
+			children = (
+				682BE4641D3D1333005BB772 /* CSHPreferenceTableViewController.h */,
+				682BE4651D3D1333005BB772 /* CSHPreferenceTableViewController.m */,
+			);
+			name = PreferTable;
+			sourceTree = "<group>";
+		};
+		F10C51631D5310C800CEAB41 /* MenuTable */ = {
+			isa = PBXGroup;
+			children = (
+				6806A1841C89689B00C4CD0E /* CSHMenuTableViewController.h */,
+				6806A1851C89689B00C4CD0E /* CSHMenuTableViewController.m */,
+			);
+			name = MenuTable;
+			sourceTree = "<group>";
+		};
+		F10C51641D54208700CEAB41 /* DriverCertificate */ = {
+			isa = PBXGroup;
+			children = (
+				F10C51691D54267700CEAB41 /* MainTable */,
+				F10C516A1D54269200CEAB41 /* ProvinceSelection */,
+			);
+			name = DriverCertificate;
+			sourceTree = "<group>";
+		};
+		F10C51661D54215B00CEAB41 /* Guidelines */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Guidelines;
+			sourceTree = "<group>";
+		};
+		F10C51671D5421A100CEAB41 /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				687CF6491D4A1C1600C3162E /* CSHRecommendationViewController.h */,
+				687CF64A1D4A1C1600C3162E /* CSHRecommendationViewController.m */,
+			);
+			name = Recommendation;
+			sourceTree = "<group>";
+		};
+		F10C51681D5421D800CEAB41 /* FoundStation */ = {
+			isa = PBXGroup;
+			children = (
+				682BE4671D3D136E005BB772 /* CSHFindChargerTableViewController.h */,
+				682BE4681D3D136E005BB772 /* CSHFindChargerTableViewController.m */,
+			);
+			name = FoundStation;
+			sourceTree = "<group>";
+		};
+		F10C51691D54267700CEAB41 /* MainTable */ = {
+			isa = PBXGroup;
+			children = (
+				688F61361D3FB5CB00337300 /* CSHDriverCertificatingViewController.h */,
+				688F61371D3FB5CB00337300 /* CSHDriverCertificatingViewController.m */,
+			);
+			name = MainTable;
+			sourceTree = "<group>";
+		};
+		F10C516A1D54269200CEAB41 /* ProvinceSelection */ = {
+			isa = PBXGroup;
+			children = (
+				688F61391D3FB70200337300 /* CSHProvinceSelectionViewController.h */,
+				688F613A1D3FB70200337300 /* CSHProvinceSelectionViewController.m */,
+				688F613E1D3FBC2800337300 /* CSHProvinceNameCollectionViewCell.h */,
+				688F613F1D3FBC2800337300 /* CSHProvinceNameCollectionViewCell.m */,
+			);
+			name = ProvinceSelection;
+			sourceTree = "<group>";
+		};
+		F10C516B1D54275800CEAB41 /* SettingsBtn */ = {
+			isa = PBXGroup;
+			children = (
+				F10C516C1D5427BD00CEAB41 /* MainTable */,
+				F10C516D1D542EC100CEAB41 /* FeedBack */,
+				F10C516E1D542EDE00CEAB41 /* AboutUs */,
+			);
+			name = SettingsBtn;
+			sourceTree = "<group>";
+		};
+		F10C516C1D5427BD00CEAB41 /* MainTable */ = {
+			isa = PBXGroup;
+			children = (
+				687CF6341D4A0C6700C3162E /* CSHSettingsViewController.h */,
+				687CF6351D4A0C6700C3162E /* CSHSettingsViewController.m */,
+			);
+			name = MainTable;
+			sourceTree = "<group>";
+		};
+		F10C516D1D542EC100CEAB41 /* FeedBack */ = {
+			isa = PBXGroup;
+			children = (
+				687CF6371D4A0C8D00C3162E /* CSHFeedbackViewController.h */,
+				687CF6381D4A0C8D00C3162E /* CSHFeedbackViewController.m */,
+			);
+			name = FeedBack;
+			sourceTree = "<group>";
+		};
+		F10C516E1D542EDE00CEAB41 /* AboutUs */ = {
+			isa = PBXGroup;
+			children = (
+				687CF63A1D4A0CAC00C3162E /* CSHAboutUsViewController.h */,
+				687CF63B1D4A0CAC00C3162E /* CSHAboutUsViewController.m */,
+			);
+			name = AboutUs;
+			sourceTree = "<group>";
+		};
+		F10C516F1D542F9E00CEAB41 /* FourBtn */ = {
+			isa = PBXGroup;
+			children = (
+				F10C51701D542FC900CEAB41 /* MessageCenter */,
+				F10C51711D542FE100CEAB41 /* MyCollection */,
+				F10C51721D54331A00CEAB41 /* ChargingHistory */,
+				F10C51731D54333900CEAB41 /* BookingHistory */,
+			);
+			name = FourBtn;
+			sourceTree = "<group>";
+		};
+		F10C51701D542FC900CEAB41 /* MessageCenter */ = {
+			isa = PBXGroup;
+			children = (
+				687CF63D1D4A118400C3162E /* CSHMessageCenterViewController.h */,
+				687CF63E1D4A118400C3162E /* CSHMessageCenterViewController.m */,
+			);
+			name = MessageCenter;
+			sourceTree = "<group>";
+		};
+		F10C51711D542FE100CEAB41 /* MyCollection */ = {
+			isa = PBXGroup;
+			children = (
+				687CF6401D4A119B00C3162E /* CSHMyCollectionViewController.h */,
+				687CF6411D4A119B00C3162E /* CSHMyCollectionViewController.m */,
+				F16E83361D643BCD00E841FC /* collectionCell.h */,
+				F16E83371D643BCD00E841FC /* collectionCell.m */,
+				F16E83381D643BCD00E841FC /* collectionCell.xib */,
+			);
+			name = MyCollection;
+			sourceTree = "<group>";
+		};
+		F10C51721D54331A00CEAB41 /* ChargingHistory */ = {
+			isa = PBXGroup;
+			children = (
+				687CF6431D4A11B700C3162E /* CSHChargingHistoryViewController.h */,
+				687CF6441D4A11B700C3162E /* CSHChargingHistoryViewController.m */,
+				F11A71DF1D64B0D80067E9B4 /* chargingHistoryCell.h */,
+				F11A71E01D64B0D80067E9B4 /* chargingHistoryCell.m */,
+				F11A71E11D64B0D80067E9B4 /* chargingHistoryCell.xib */,
+			);
+			name = ChargingHistory;
+			sourceTree = "<group>";
+		};
+		F10C51731D54333900CEAB41 /* BookingHistory */ = {
+			isa = PBXGroup;
+			children = (
+				687CF6461D4A11C900C3162E /* CSHBookingHistoryViewController.h */,
+				687CF6471D4A11C900C3162E /* CSHBookingHistoryViewController.m */,
+			);
+			name = BookingHistory;
+			sourceTree = "<group>";
+		};
+		F10D1FF11D6301E7005E7F16 /* ScanView */ = {
+			isa = PBXGroup;
+			children = (
+				6834E00F1C87040600A4EBCE /* CSHChargingViewController.h */,
+				6834E0101C87040600A4EBCE /* CSHChargingViewController.m */,
+			);
+			name = ScanView;
+			sourceTree = "<group>";
+		};
+		F10D1FF21D630204005E7F16 /* StartStation */ = {
+			isa = PBXGroup;
+			children = (
+				F10D20011D630A0C005E7F16 /* CSHStartStationVC.h */,
+				F10D20021D630A0C005E7F16 /* CSHStartStationVC.m */,
+				F10D20031D630A0C005E7F16 /* CSHStartStationVC.xib */,
+				F16018A41D65FE28004CCF08 /* CSHStartingStationVC.h */,
+				F16018A51D65FE28004CCF08 /* CSHStartingStationVC.m */,
+			);
+			name = StartStation;
+			sourceTree = "<group>";
+		};
+		F122268F1D68531C0099111E /* personnelInfoVC */ = {
+			isa = PBXGroup;
+			children = (
+				F105F81A1D6BE11900C90AEB /* CSHPersonnelTableVC.h */,
+				F105F81B1D6BE11900C90AEB /* CSHPersonnelTableVC.m */,
+				F189A5F81D6C4E2C0049C5DC /* CSHChangePWDTableVC.h */,
+				F189A5F91D6C4E2C0049C5DC /* CSHChangePWDTableVC.m */,
+			);
+			name = personnelInfoVC;
+			sourceTree = "<group>";
+		};
+		F16018921D65489E004CCF08 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F16018931D65489E004CCF08 /* MBProgressHUD+MJ.h */,
+				F16018941D65489E004CCF08 /* MBProgressHUD+MJ.m */,
+				F16018951D65489E004CCF08 /* MBProgressHUD.bundle */,
+				F16018961D65489E004CCF08 /* MBProgressHUD.h */,
+				F16018971D65489E004CCF08 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		F16C34FE1D5B31D700D23142 /* LoginVC */ = {
+			isa = PBXGroup;
+			children = (
+				68E21BB21D2AB09E00E17F4A /* CSHLoginViewController.h */,
+				68E21BB31D2AB09E00E17F4A /* CSHLoginViewController.m */,
+			);
+			name = LoginVC;
+			sourceTree = "<group>";
+		};
+		F16C34FF1D5B325A00D23142 /* RegisterVC */ = {
+			isa = PBXGroup;
+			children = (
+				68E21BB51D2AB0B000E17F4A /* CSHSignupViewController.h */,
+				68E21BB61D2AB0B000E17F4A /* CSHSignupViewController.m */,
+			);
+			name = RegisterVC;
+			sourceTree = "<group>";
+		};
+		F16C35001D5C0DE200D23142 /* Login-CaptchaVC-？？？ */ = {
+			isa = PBXGroup;
+			children = (
+				68E21BCD1D2FF6D000E17F4A /* CSHLoginAndSignupViewController.h */,
+				68E21BCE1D2FF6D000E17F4A /* CSHLoginAndSignupViewController.m */,
+				68E21BD01D2FFA0200E17F4A /* CSHCaptchaViewController.h */,
+				68E21BD11D2FFA0200E17F4A /* CSHCaptchaViewController.m */,
+			);
+			name = "Login-CaptchaVC-？？？";
+			sourceTree = "<group>";
+		};
+		F16C35011D5C0E7F00D23142 /* Reset-New-PSD-VC */ = {
+			isa = PBXGroup;
+			children = (
+				68E21BB81D2ABDAF00E17F4A /* CSHResetPasswordViewController.h */,
+				68E21BB91D2ABDAF00E17F4A /* CSHResetPasswordViewController.m */,
+				68E21BC11D2D563300E17F4A /* CSHNewPasswordViewController.h */,
+				68E21BC21D2D563300E17F4A /* CSHNewPasswordViewController.m */,
+			);
+			name = "Reset-New-PSD-VC";
+			sourceTree = "<group>";
+		};
+		F1CFB1BF1D7FB21300CF572F /* RechargeRecordTable */ = {
+			isa = PBXGroup;
+			children = (
+				F1CFB1B71D7FAA9900CF572F /* CSHRechargeRecordTableVC.h */,
+				F1CFB1B81D7FAA9900CF572F /* CSHRechargeRecordTableVC.m */,
+				F1CFB1BA1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.h */,
+				F1CFB1BB1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.m */,
+				F1CFB1BC1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.xib */,
+			);
+			name = RechargeRecordTable;
+			sourceTree = "<group>";
+		};
+		F1CFB1C01D7FB23800CF572F /* RechargeRecordVC */ = {
+			isa = PBXGroup;
+			children = (
+				F1CFB1C11D7FB28100CF572F /* CSHRechargeRecordsVC.h */,
+				F1CFB1C21D7FB28100CF572F /* CSHRechargeRecordsVC.m */,
+				F1CFB1C41D7FB80700CF572F /* RechargeRecordCell.h */,
+				F1CFB1C51D7FB80700CF572F /* RechargeRecordCell.m */,
+				F1CFB1C61D7FB80700CF572F /* RechargeRecordCell.xib */,
+			);
+			name = RechargeRecordVC;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6834DFD41C86FF8700A4EBCE /* ChargingStationHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6834E0021C86FF8700A4EBCE /* Build configuration list for PBXNativeTarget "ChargingStationHelper" */;
+			buildPhases = (
+				FC772C7B8EEFFE23FD800B6B /* [CP] Check Pods Manifest.lock */,
+				6834DFD11C86FF8700A4EBCE /* Sources */,
+				6834DFD21C86FF8700A4EBCE /* Frameworks */,
+				6834DFD31C86FF8700A4EBCE /* Resources */,
+				339514822B82E1FE002F0982 /* [CP] Embed Pods Frameworks */,
+				AB539E9CEAE111D14D88D1FD /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChargingStationHelper;
+			productName = ChargingStationHelper;
+			productReference = 6834DFD51C86FF8700A4EBCE /* ChargingStationHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6834DFED1C86FF8700A4EBCE /* ChargingStationHelperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6834E0051C86FF8700A4EBCE /* Build configuration list for PBXNativeTarget "ChargingStationHelperTests" */;
+			buildPhases = (
+				A5F017DB477C46F36C4F8CD7 /* [CP] Check Pods Manifest.lock */,
+				6834DFEA1C86FF8700A4EBCE /* Sources */,
+				6834DFEB1C86FF8700A4EBCE /* Frameworks */,
+				6834DFEC1C86FF8700A4EBCE /* Resources */,
+				ED927F6D360200372A13B7DC /* [CP] Embed Pods Frameworks */,
+				F66D9F9E7651FB5BC9154B3B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6834DFF01C86FF8700A4EBCE /* PBXTargetDependency */,
+			);
+			name = ChargingStationHelperTests;
+			productName = ChargingStationHelperTests;
+			productReference = 6834DFEE1C86FF8700A4EBCE /* ChargingStationHelperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6834DFF81C86FF8700A4EBCE /* ChargingStationHelperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6834E0081C86FF8700A4EBCE /* Build configuration list for PBXNativeTarget "ChargingStationHelperUITests" */;
+			buildPhases = (
+				0805D7E58F1190AD545DA200 /* [CP] Check Pods Manifest.lock */,
+				6834DFF51C86FF8700A4EBCE /* Sources */,
+				6834DFF61C86FF8700A4EBCE /* Frameworks */,
+				6834DFF71C86FF8700A4EBCE /* Resources */,
+				94E407BF2BEB2B7EF915FFDE /* [CP] Embed Pods Frameworks */,
+				55F4DDE754CEAEABD4496F6A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6834DFFB1C86FF8700A4EBCE /* PBXTargetDependency */,
+			);
+			name = ChargingStationHelperUITests;
+			productName = ChargingStationHelperUITests;
+			productReference = 6834DFF91C86FF8700A4EBCE /* ChargingStationHelperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6834DFCD1C86FF8600A4EBCE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = com.iycharge;
+				TargetAttributes = {
+					6834DFD41C86FF8700A4EBCE = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 6Y4J8CKDG6;
+					};
+					6834DFED1C86FF8700A4EBCE = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 6834DFD41C86FF8700A4EBCE;
+					};
+					6834DFF81C86FF8700A4EBCE = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 6834DFD41C86FF8700A4EBCE;
+					};
+				};
+			};
+			buildConfigurationList = 6834DFD01C86FF8700A4EBCE /* Build configuration list for PBXProject "ChargingStationHelper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6834DFCC1C86FF8600A4EBCE;
+			productRefGroup = 6834DFD61C86FF8700A4EBCE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6834DFD41C86FF8700A4EBCE /* ChargingStationHelper */,
+				6834DFED1C86FF8700A4EBCE /* ChargingStationHelperTests */,
+				6834DFF81C86FF8700A4EBCE /* ChargingStationHelperUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6834DFD31C86FF8700A4EBCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				682BE4601D37D889005BB772 /* Menu.storyboard in Resources */,
+				F11A71E31D64B0D80067E9B4 /* chargingHistoryCell.xib in Resources */,
+				68E21BB01D2AB02E00E17F4A /* Login.storyboard in Resources */,
+				F122268E1D6850A10099111E /* personneInfo.storyboard in Resources */,
+				6834DFE81C86FF8700A4EBCE /* LaunchScreen.storyboard in Resources */,
+				F1CFB1BE1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.xib in Resources */,
+				F1CFB1C81D7FB80700CF572F /* RechargeRecordCell.xib in Resources */,
+				F1CA95F31D59BD3F00E22BCD /* Images.xcassets in Resources */,
+				F10D20051D630A0C005E7F16 /* CSHStartStationVC.xib in Resources */,
+				6834DFE51C86FF8700A4EBCE /* Assets.xcassets in Resources */,
+				F16018991D65489E004CCF08 /* MBProgressHUD.bundle in Resources */,
+				6834DFE31C86FF8700A4EBCE /* Main.storyboard in Resources */,
+				F16E833A1D643BCD00E841FC /* collectionCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6834DFEC1C86FF8700A4EBCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6834DFF71C86FF8700A4EBCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0805D7E58F1190AD545DA200 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		339514822B82E1FE002F0982 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChargingStationHelper/Pods-ChargingStationHelper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		55F4DDE754CEAEABD4496F6A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChargingStationHelperUITests/Pods-ChargingStationHelperUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94E407BF2BEB2B7EF915FFDE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChargingStationHelperUITests/Pods-ChargingStationHelperUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5F017DB477C46F36C4F8CD7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AB539E9CEAE111D14D88D1FD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChargingStationHelper/Pods-ChargingStationHelper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED927F6D360200372A13B7DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChargingStationHelperTests/Pods-ChargingStationHelperTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F66D9F9E7651FB5BC9154B3B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChargingStationHelperTests/Pods-ChargingStationHelperTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC772C7B8EEFFE23FD800B6B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6834DFD11C86FF8700A4EBCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				682BE4691D3D136E005BB772 /* CSHFindChargerTableViewController.m in Sources */,
+				68D6EA2C1D0DA0CA00020D83 /* CSHDevice.m in Sources */,
+				6806A1781C8826AE00C4CD0E /* CSHHTTPError.m in Sources */,
+				688F61321D3E759200337300 /* CSHBalanceViewController.m in Sources */,
+				687CF6391D4A0C8D00C3162E /* CSHFeedbackViewController.m in Sources */,
+				68E21BAA1D2A94DC00E17F4A /* CSHChargingStationCommentTableViewCell.m in Sources */,
+				F189A5FA1D6C4E2C0049C5DC /* CSHChangePWDTableVC.m in Sources */,
+				6806A1791C8826AE00C4CD0E /* CSHHTTPErrorMessage.m in Sources */,
+				F14381D11D7D45C6003FDD0F /* CSHPayMoneyVC.m in Sources */,
+				68E21BB71D2AB0B000E17F4A /* CSHSignupViewController.m in Sources */,
+				F160189A1D65489E004CCF08 /* MBProgressHUD.m in Sources */,
+				682BE4781D3D200C005BB772 /* CSHCarSeriesTableViewCell.m in Sources */,
+				F1CFB1C71D7FB80700CF572F /* RechargeRecordCell.m in Sources */,
+				68E21BC61D2D575500E17F4A /* NSUserDefaults+UserConfig.m in Sources */,
+				F105F81C1D6BE11900C90AEB /* CSHPersonnelTableVC.m in Sources */,
+				68E21BBD1D2D4A5600E17F4A /* UIButton+CSHLogin.m in Sources */,
+				6834DFDD1C86FF8700A4EBCE /* AppDelegate.m in Sources */,
+				687CF6361D4A0C6700C3162E /* CSHSettingsViewController.m in Sources */,
+				68E21BCF1D2FF6D000E17F4A /* CSHLoginAndSignupViewController.m in Sources */,
+				687CF64B1D4A1C1600C3162E /* CSHRecommendationViewController.m in Sources */,
+				6806A1641C880CFB00C4CD0E /* CSHClient.m in Sources */,
+				68E21BBA1D2ABDAF00E17F4A /* CSHResetPasswordViewController.m in Sources */,
+				68FE6C501C970648002C49C0 /* CSHChargingStationViewController.m in Sources */,
+				688F61401D3FBC2800337300 /* CSHProvinceNameCollectionViewCell.m in Sources */,
+				CE6C30261D55B08D009E82AF /* UIViewController+KSGuid.m in Sources */,
+				682BE4661D3D1333005BB772 /* CSHPreferenceTableViewController.m in Sources */,
+				68FE6C4D1C96BFAF002C49C0 /* CSHTabBarController.m in Sources */,
+				687CF6421D4A119B00C3162E /* CSHMyCollectionViewController.m in Sources */,
+				68C53E781D20234600F760B3 /* NSUserDefaults+CSH.m in Sources */,
+				68E21BB41D2AB09E00E17F4A /* CSHLoginViewController.m in Sources */,
+				F11A71E21D64B0D80067E9B4 /* chargingHistoryCell.m in Sources */,
+				682BE4751D3D1FFD005BB772 /* CSHCarBrandTableViewCell.m in Sources */,
+				6806A1861C89689B00C4CD0E /* CSHMenuTableViewController.m in Sources */,
+				6806A17D1C88518600C4CD0E /* CSHNetworkingManager.m in Sources */,
+				6834E0111C87040600A4EBCE /* CSHChargingViewController.m in Sources */,
+				F16E83391D643BCD00E841FC /* collectionCell.m in Sources */,
+				F16018A61D65FE28004CCF08 /* CSHStartingStationVC.m in Sources */,
+				68E21BD21D2FFA0200E17F4A /* CSHCaptchaViewController.m in Sources */,
+				682BE46F1D3D1CF1005BB772 /* CSHCarSeriesViewController.m in Sources */,
+				68E21BC91D2FDFC800E17F4A /* CSHAccount.m in Sources */,
+				68E21BDB1D321D6B00E17F4A /* CSHDeviceAnnotationView.m in Sources */,
+				688F61381D3FB5CB00337300 /* CSHDriverCertificatingViewController.m in Sources */,
+				F16018981D65489E004CCF08 /* MBProgressHUD+MJ.m in Sources */,
+				6806A17A1C8826AE00C4CD0E /* CSHModel.m in Sources */,
+				68E21BCC1D2FE7CA00E17F4A /* CSHNetworkingManager+API.m in Sources */,
+				687CF6451D4A11B700C3162E /* CSHChargingHistoryViewController.m in Sources */,
+				6834E0141C87041C00A4EBCE /* CSHTimelineViewController.m in Sources */,
+				68E21BC31D2D563300E17F4A /* CSHNewPasswordViewController.m in Sources */,
+				6834DFDA1C86FF8700A4EBCE /* main.m in Sources */,
+				68DE37EA1CF858DE009D1474 /* CSHMapViewController.m in Sources */,
+				F1CFB1C31D7FB28100CF572F /* CSHRechargeRecordsVC.m in Sources */,
+				68E21BC01D2D4CBE00E17F4A /* UIView+CornerRadius.m in Sources */,
+				687CF63F1D4A118400C3162E /* CSHMessageCenterViewController.m in Sources */,
+				6806A1891C89825000C4CD0E /* CSHChargingStationTableViewCell.m in Sources */,
+				682BE46C1D3D199B005BB772 /* CSHCarBrandListViewController.m in Sources */,
+				68E21BAD1D2A968F00E17F4A /* CSHChargingStationPhotoCollectionViewCell.m in Sources */,
+				F105F8291D6BFD6D00C90AEB /* KSDatePicker.m in Sources */,
+				688F61431D3FBECF00337300 /* UIStoryboard+CSH.m in Sources */,
+				F1CFB1B91D7FAA9900CF572F /* CSHRechargeRecordTableVC.m in Sources */,
+				687CF63C1D4A0CAC00C3162E /* CSHAboutUsViewController.m in Sources */,
+				688F613B1D3FB70200337300 /* CSHProvinceSelectionViewController.m in Sources */,
+				6834E0171C87043500A4EBCE /* CSHChargingStationsViewController.m in Sources */,
+				687CF6481D4A11C900C3162E /* CSHBookingHistoryViewController.m in Sources */,
+				68E21BD81D320B6400E17F4A /* CSHDeviceAnnotation.m in Sources */,
+				F1CFB1BD1D7FAB3A00CF572F /* CSHRechargeRecordTableCell.m in Sources */,
+				68C53E7B1D2026DC00F760B3 /* CSHKeywordTableViewCell.m in Sources */,
+				F105F82A1D6BFD6D00C90AEB /* KSDatePickerAppearance.m in Sources */,
+				688F61351D3E75A100337300 /* CSHPaymentViewController.m in Sources */,
+				F10D20041D630A0C005E7F16 /* CSHStartStationVC.m in Sources */,
+				68E21BA71D2A933700E17F4A /* CSHChargingStationDetailTableViewCell.m in Sources */,
+				6806A18C1C89828600C4CD0E /* UIColor+CSH.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6834DFEA1C86FF8700A4EBCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6834DFF31C86FF8700A4EBCE /* ChargingStationHelperTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6834DFF51C86FF8700A4EBCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6834DFFE1C86FF8700A4EBCE /* ChargingStationHelperUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6834DFF01C86FF8700A4EBCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6834DFD41C86FF8700A4EBCE /* ChargingStationHelper */;
+			targetProxy = 6834DFEF1C86FF8700A4EBCE /* PBXContainerItemProxy */;
+		};
+		6834DFFB1C86FF8700A4EBCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6834DFD41C86FF8700A4EBCE /* ChargingStationHelper */;
+			targetProxy = 6834DFFA1C86FF8700A4EBCE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6834DFE11C86FF8700A4EBCE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6834DFE21C86FF8700A4EBCE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6834DFE61C86FF8700A4EBCE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6834DFE71C86FF8700A4EBCE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		68E21BAE1D2AB02E00E17F4A /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68E21BAF1D2AB02E00E17F4A /* Base */,
+			);
+			name = Login.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6834E0001C86FF8700A4EBCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6834E0011C86FF8700A4EBCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6834E0031C86FF8700A4EBCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3577A822659B6392ADA51BE1 /* Pods-ChargingStationHelper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ./ChargingStationHelper/CSHPrefix.pch;
+				INFOPLIST_FILE = ChargingStationHelper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xiaolong.XLSphereVi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		6834E0041C86FF8700A4EBCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3930151ADF3388BCE47EFB4A /* Pods-ChargingStationHelper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ./ChargingStationHelper/CSHPrefix.pch;
+				INFOPLIST_FILE = ChargingStationHelper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xiaolong.XLSphereVi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		6834E0061C86FF8700A4EBCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6EEA8FC48DD351A707DBE1A /* Pods-ChargingStationHelperTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ChargingStationHelperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iycharge.ChargingStationHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChargingStationHelper.app/ChargingStationHelper";
+			};
+			name = Debug;
+		};
+		6834E0071C86FF8700A4EBCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63A71A830B4A3EFC703D0883 /* Pods-ChargingStationHelperTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ChargingStationHelperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iycharge.ChargingStationHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChargingStationHelper.app/ChargingStationHelper";
+			};
+			name = Release;
+		};
+		6834E0091C86FF8700A4EBCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D3F9BA6C62A5AAB61A9C205 /* Pods-ChargingStationHelperUITests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = ChargingStationHelperUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iycharge.ChargingStationHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ChargingStationHelper;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		6834E00A1C86FF8700A4EBCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C070D3FCC0B53C0A05880EB5 /* Pods-ChargingStationHelperUITests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = ChargingStationHelperUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iycharge.ChargingStationHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ChargingStationHelper;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6834DFD01C86FF8700A4EBCE /* Build configuration list for PBXProject "ChargingStationHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6834E0001C86FF8700A4EBCE /* Debug */,
+				6834E0011C86FF8700A4EBCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6834E0021C86FF8700A4EBCE /* Build configuration list for PBXNativeTarget "ChargingStationHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6834E0031C86FF8700A4EBCE /* Debug */,
+				6834E0041C86FF8700A4EBCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6834E0051C86FF8700A4EBCE /* Build configuration list for PBXNativeTarget "ChargingStationHelperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6834E0061C86FF8700A4EBCE /* Debug */,
+				6834E0071C86FF8700A4EBCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6834E0081C86FF8700A4EBCE /* Build configuration list for PBXNativeTarget "ChargingStationHelperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6834E0091C86FF8700A4EBCE /* Debug */,
+				6834E00A1C86FF8700A4EBCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6834DFCD1C86FF8600A4EBCE /* Project object */;
+}

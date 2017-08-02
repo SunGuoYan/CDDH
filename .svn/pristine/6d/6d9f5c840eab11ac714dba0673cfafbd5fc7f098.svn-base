@@ -1,0 +1,117 @@
+//
+//  CSHTimelineViewController.m
+//  ChargingStationHelper
+//
+//  Created by WangShaopeng on 3/2/16.
+//  Copyright © 2016 com.iycharge. All rights reserved.
+//
+
+//孕妇
+
+#define Pregnant_API @"http://apicloud.mob.com/v1/cook/menu/search?cid=0010001047&duid=1f71cbe011032931d3ad359968d5abd80f373903&key=d7a540c03540&page=1&size=20"
+
+#define base @"http://apicloud.mob.com/v1/cook/menu/search?"
+#define url @"cid=0010001047&duid=1f71cbe011032931d3ad359968d5abd80f373903&key=d7a540c03540&page=1&size=20"
+
+#import "CSHTimelineViewController.h"
+//#import "CSHNetworkingManager.h"
+#import "CSHNetworkingManager+API.h"
+
+
+@interface CSHTimelineViewController ()<UIWebViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property(strong,nonatomic)UIImageView *loadingImageView;
+@end
+
+@implementation CSHTimelineViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.webView.scrollView.showsVerticalScrollIndicator=NO;
+    self.webView.scrollView.showsHorizontalScrollIndicator=NO;
+    self.webView.scrollView.bounces=NO;
+    self.webView.delegate=self;
+    
+    NSString *found_url=@"http://120.52.12.203:8100/app/discovery/html/discovery.html";
+    
+//    NSString *found_url=@"https://www.baidu.com";
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:found_url]]];
+
+    
+    //需要加等待加载符号的话，查看webview的Demo，在协议加载完成里面stop animation
+//    [self addLoadImage];
+    
+    [self requestNetData];
+
+}
+
+-(void)requestNetData{
+    NSString *urlStr=@"/devices/search";
+    CSHNetworkingManager *net=[[CSHNetworkingManager alloc]init];
+    NSLog(@"net");
+    [net csh_GET:urlStr parameters:nil success:^(NSInteger statusCode, id result) {
+        
+        NSLog(@"success:%ld",statusCode);
+        
+    } failure:^(NSInteger statusCode, NSError *error) {
+        NSLog(@"failure-1:%ld",statusCode);
+        NSLog(@"failure-1:%@",error);
+    }];
+    
+}
+-(void)addLoadImage{
+    
+    //等待加载符
+    CGFloat screenW=[UIScreen mainScreen].bounds.size.width;
+    CGFloat screeH=[UIScreen mainScreen].bounds.size.height;
+    self.loadingImageView.frame=CGRectMake(screenW/2-65, screeH/2-40, 130, 80);
+    self.loadingImageView.backgroundColor=[UIColor greenColor];
+    [self.webView addSubview:self.loadingImageView];
+    
+    NSArray<NSString *> *imageNames = @[@"progress001", @"progress002", @"progress003", @"progress004", @"progress005", @"progress006", @"progress007", @"progress008", @"progress009", @"progress010", @"progress011", @"progress012", @"progress013", @"progress014", @"progress015", @"progress016", @"progress017", @"progress018", @"progress019", @"progress020", @"progress021", @"progress022", @"progress023", @"progress024", @"progress025", @"progress026", @"progress027", @"progress028", @"progress029", @"progress030", @"progress031", @"progress032", @"progress033", @"progress034", @"progress035", @"progress036", @"progress037", @"progress038", @"progress039", @"progress040", @"progress041", @"progress042", @"progress043", @"progress044", @"progress045", @"progress046", @"progress047", @"progress048", @"progress049", @"progress050", @"progress051", @"progress052", @"progress053", @"progress054", @"progress055", @"progress056", @"progress057", @"progress058", @"progress059", @"progress060"];
+    NSMutableArray<UIImage *> *images = [@[] mutableCopy];
+    for (NSString *name in imageNames) {
+        [images addObject:[UIImage imageNamed:name]];
+    }
+    self.loadingImageView.animationImages = images;
+    self.loadingImageView.animationDuration = 2.0f;
+    self.loadingImageView.animationRepeatCount = CGFLOAT_MAX;
+    
+    self.loadingImageView.hidden = NO;
+    [self.loadingImageView startAnimating];
+    
+//    [self.loadingImageView stopAnimating];
+//    self.loadingImageView.hidden = YES;
+    
+}
+
+//UIWebView的几个协议函数
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    
+    return YES;
+    
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    
+//    NSLog(@"webViewDidStartLoad");
+    
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+//    NSLog(@"webViewDidFinishLoad");
+
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+    
+//    NSLog(@"didFailLoadWithError");
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+
+@end

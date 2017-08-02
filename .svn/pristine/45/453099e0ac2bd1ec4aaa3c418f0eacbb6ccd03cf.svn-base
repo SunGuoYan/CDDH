@@ -1,0 +1,49 @@
+//
+//  CSHStartStationVC.m
+//  ChargingStationHelper
+//
+//  Created by SunGuoYan on 16/8/16.
+//  Copyright © 2016年 com.iycharge. All rights reserved.
+//
+
+#import "CSHStartStationVC.h"
+
+@interface CSHStartStationVC ()
+
+//开启充电 button
+@property (weak, nonatomic) IBOutlet UIButton *startChargingBtn;
+
+@end
+
+@implementation CSHStartStationVC
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.startChargingBtn.layer.cornerRadius=60;
+    self.startChargingBtn.layer.masksToBounds=YES;
+    self.title=@"开启电桩";
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (IBAction)startChargingBtn:(UIButton *)sender {
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
